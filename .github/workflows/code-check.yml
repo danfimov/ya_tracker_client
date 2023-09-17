@@ -24,4 +24,3 @@ jobs:
       - run: pip install --upgrade pip
       - run: make install
       - run: make test-cov
-g
