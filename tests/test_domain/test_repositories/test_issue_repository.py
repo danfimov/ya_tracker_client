@@ -4,10 +4,9 @@ from typing import Any
 import pytest
 
 from tests.fixtures.issue import IssueFactory
-
-from ya_tacker_client.domain.client import BaseClient
-from ya_tacker_client.domain.client.errors import ClientObjectNotFoundError
-from ya_tacker_client.domain.repositories.issue import IssueRepository
+from ya_tracker_client.domain.client import BaseClient
+from ya_tracker_client.domain.client.errors import ClientObjectNotFoundError
+from ya_tracker_client.domain.repositories.issue import IssueRepository
 
 
 class ClientForIssueRepository(BaseClient):

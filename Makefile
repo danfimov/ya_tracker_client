@@ -1,6 +1,6 @@
 args := $(wordlist 2, 100, $(MAKECMDGOALS))
 
-APPLICATION_NAME = ya_tacker_client
+APPLICATION_NAME = ya_tracker_client
 
 HELP_FUN = \
 	%help; while(<>){push@{$$help{$$2//'options'}},[$$1,$$3] \
@@ -8,7 +8,7 @@ HELP_FUN = \
     print"$$_:\n", map"  $$_->[0]".(" "x(20-length($$_->[0])))."$$_->[1]\n",\
     @{$$help{$$_}},"\n" for keys %help; \
 
-CODE = ya_tacker_client
+CODE = ya_tracker_client
 TEST = poetry run python3 -m pytest --verbosity=2 --showlocals --log-level=DEBUG
 
 ifndef args

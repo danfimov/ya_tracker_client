@@ -5,7 +5,7 @@ from typing import Any
 from aiohttp import ClientSession, ClientTimeout, TCPConnector
 from certifi import where
 
-from ya_tacker_client.domain.client import BaseClient
+from ya_tracker_client.domain.client import BaseClient
 
 
 logger = getLogger(__name__)

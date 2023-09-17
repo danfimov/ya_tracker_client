@@ -1,7 +1,7 @@
 from json import loads
 
-from ya_tacker_client.domain.entities.issue import Issue
-from ya_tacker_client.domain.repositories.base import EntityRepository
+from ya_tracker_client.domain.entities.issue import Issue
+from ya_tracker_client.domain.repositories.base import EntityRepository
 
 
 class IssueRepository(EntityRepository):

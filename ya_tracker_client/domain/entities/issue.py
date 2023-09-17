@@ -2,12 +2,12 @@ from datetime import datetime
 
 from pydantic import AliasChoices, Field
 
-from ya_tacker_client.domain.entities.base import AbstractEntity
-from ya_tacker_client.domain.entities.priority import Priority
-from ya_tacker_client.domain.entities.queue import Queue
-from ya_tacker_client.domain.entities.sprint import Sprint
-from ya_tacker_client.domain.entities.status import Status
-from ya_tacker_client.domain.entities.user import User
+from ya_tracker_client.domain.entities.base import AbstractEntity
+from ya_tracker_client.domain.entities.priority import Priority
+from ya_tracker_client.domain.entities.queue import Queue
+from ya_tracker_client.domain.entities.sprint import Sprint
+from ya_tracker_client.domain.entities.status import Status
+from ya_tracker_client.domain.entities.user import User
 
 
 class IssueShort(AbstractEntity):

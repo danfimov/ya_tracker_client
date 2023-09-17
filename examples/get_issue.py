@@ -3,7 +3,7 @@ from asyncio import run
 
 from dotenv import load_dotenv
 
-from ya_tacker_client import YaTrackerClient
+from ya_tracker_client import YaTrackerClient
 
 
 load_dotenv()

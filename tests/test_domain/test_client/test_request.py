@@ -5,8 +5,8 @@ from typing import TYPE_CHECKING, Any, Type
 
 import pytest
 
-from ya_tacker_client.domain.client import BaseClient
-from ya_tacker_client.domain.client.errors import (
+from ya_tracker_client.domain.client import BaseClient
+from ya_tracker_client.domain.client.errors import (
     ClientAuthError,
     ClientError,
     ClientObjectConflictError,

@@ -3,7 +3,7 @@ from http import HTTPStatus
 from logging import getLogger
 from typing import Any
 
-from ya_tacker_client.domain.client.errors import (
+from ya_tracker_client.domain.client.errors import (
     ClientAuthError,
     ClientError,
     ClientInitTokenError,

@@ -4,8 +4,8 @@ from typing import Any
 
 import pytest
 
-from ya_tacker_client.domain.client import BaseClient
-from ya_tacker_client.domain.client.errors import ClientInitTokenError
+from ya_tracker_client.domain.client import BaseClient
+from ya_tracker_client.domain.client.errors import ClientInitTokenError
 
 
 class ClientForTestInitialization(BaseClient):

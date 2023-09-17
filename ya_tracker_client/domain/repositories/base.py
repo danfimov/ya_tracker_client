@@ -1,4 +1,4 @@
-from ya_tacker_client.domain.client import BaseClient
+from ya_tracker_client.domain.client import BaseClient
 
 
 class EntityRepository:

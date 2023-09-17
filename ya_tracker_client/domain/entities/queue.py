@@ -1,6 +1,6 @@
 from pydantic import AliasChoices, Field
 
-from ya_tacker_client.domain.entities.base import AbstractEntity
+from ya_tracker_client.domain.entities.base import AbstractEntity
 
 
 class Queue(AbstractEntity):

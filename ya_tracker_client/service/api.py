@@ -1,5 +1,5 @@
-from ya_tacker_client.domain.repositories.issue import IssueRepository
-from ya_tacker_client.infrastructure.client import AiohttpClient
+from ya_tracker_client.domain.repositories.issue import IssueRepository
+from ya_tracker_client.infrastructure.client import AiohttpClient
 
 
 class YaTrackerClient(IssueRepository):
