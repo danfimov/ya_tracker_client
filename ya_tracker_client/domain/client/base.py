@@ -1,7 +1,10 @@
 from abc import ABC, abstractmethod
 from http import HTTPStatus
+from json import dumps
 from logging import getLogger
 from typing import Any
+
+from aiohttp import BytesPayload
 
 from ya_tracker_client.domain.client.errors import (
     ClientAuthError,
@@ -55,11 +58,17 @@ class BaseClient(ABC):
         payload: dict[str, Any] | None = None,
     ) -> bytes:
         uri = f"{self._base_url}/{self._api_version}{uri}"
+
+        bytes_payload = BytesPayload(
+            value=bytes(dumps(payload), encoding="utf-8"),
+            content_type="application/json",
+        )
+
         status, body = await self._make_request(
             method=method,
             url=uri,
             params=params,
-            data=payload,
+            data=bytes_payload,
         )
         self._check_status(status, body)
         return body
@@ -70,7 +79,7 @@ class BaseClient(ABC):
         method: str,
         url: str,
         params: dict[str, Any] | None = None,
-        data: bytes | None = None,
+        data: bytes | BytesPayload | None = None,
     ) -> tuple[int, bytes]:
         """
         Get raw response from via http-client.
