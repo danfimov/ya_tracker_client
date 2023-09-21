@@ -23,4 +23,4 @@ jobs:
           python-version: '3.11'
       - run: pip install --upgrade pip
       - run: make install
-      - run: make test-cov
+      - run: make test

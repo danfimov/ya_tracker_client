@@ -8,4 +8,3 @@ class EntityRepository:
 
     async def stop(self) -> None:
         await self._client.stop()
-

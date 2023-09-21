@@ -29,8 +29,9 @@ coverage = "^7.3.1"
 pytest-asyncio = "^0.21.1"
 pytest-cov = "^4.1.0"
 ruff = "^0.0.287"
-greenlet = "^2.0.2"
 polyfactory = "^2.8.2"
+gevent = "^23.9.1"
+pre-commit = "^3.4.0"
 
 [tool.poetry.group.examples.dependencies]
 python-dotenv = "^1.0.0"
@@ -63,7 +64,7 @@ directory = "pytest-cov-report"
 
 [tool.coverage.run]
 branch = true
-concurrency = ['thread', 'greenlet']
+concurrency = ['gevent']
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

@@ -30,13 +30,16 @@ test:  ##@Testing Test application with pytest
 	$(TEST)
 
 test-cov:  ##@Testing Test application with pytest and create coverage report
-	$(TEST) --cov=$(APPLICATION_NAME) --cov-report html --cov-fail-under=85
+	$(TEST) --cov=$(APPLICATION_NAME) --cov-report html --cov-fail-under=85 --cov-config pyproject.toml
 
-lint:  ##@Code Check code with pylint
+lint:  ##@Code Check code with ruff
 	poetry run python3 -m ruff $(CODE) tests
 
-format:  ##@Code Reformat code with ruff and black
+format:  ##@Code Reformat code with ruff
 	poetry run python3 -m ruff $(CODE) tests --fix
+
+precommit:  # Code Check code with pre-commit hooks
+	pre-commit run --all-files
 
 clean:  ##@Code Clean directory from garbage files
 	rm -fr *.egg-info dist
