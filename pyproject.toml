@@ -1,11 +1,40 @@
 [tool.poetry]
 name = "ya_tracker_client"
-version = "0.1.0"
+version = "0.0.1"
 description = "Async Yandex Tracker Client"
-authors = ["Дмитрий Анфимов <danfimov@yandex-team.ru>"]
+authors = [
+    "Дмитрий Анфимов <work@danfimov.ru>",
+]
+maintainers = [
+    "Дмитрий Анфимов <work@danfimov.ru>",
+]
+keywords = [
+    "Yandex",
+    "Tracker",
+    "API",
+    "async",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Framework :: AsyncIO",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+    "Typing :: Typed",
+]
 license = "MIT"
 readme = "README.md"
 packages = [{include = "ya_tracker_client"}]
+repository = "https://github.com/danfimov/ya_tracker_client/"
+exclude = [
+    "examples/"
+]
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/danfimov/ya_tracker_client/issues"
 
 [[tool.poetry.source]]
 name = "default-pypi"
