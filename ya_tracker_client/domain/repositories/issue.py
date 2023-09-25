@@ -13,7 +13,7 @@ from ya_tracker_client.domain.repositories.base import EntityRepository
 class IssueRepository(EntityRepository):
     async def get_issue(self, issue_id: str) -> Issue:
         """
-        Yandex Cloud documentation for method: https://cloud.yandex.ru/docs/tracker/concepts/issues/get-issue
+        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-issue
         """
         raw_response = await self._client.request(
             method="GET",
@@ -36,7 +36,7 @@ class IssueRepository(EntityRepository):
         attachment_ids: list[str] | None = None,
     ) -> Issue:
         """
-        Yandex Cloud documentation for method: https://cloud.yandex.ru/docs/tracker/concepts/issues/create-issue#queue
+        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/create-issue#queue
         """
         raw_response = await self._client.request(
             method="POST",
@@ -64,7 +64,7 @@ class IssueRepository(EntityRepository):
         **kwargs,
     ) -> Issue:
         """
-        Yandex Cloud documentation for method: https://cloud.yandex.ru/docs/tracker/concepts/issues/patch-issue
+        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/patch-issue
         """
         raw_response = await self._client.request(
             method="PATCH",
@@ -79,7 +79,7 @@ class IssueRepository(EntityRepository):
         localized: bool = True,
     ) -> list[Priority]:
         """
-        Yandex Cloud documentation for method: https://cloud.yandex.ru/docs/tracker/concepts/issues/get-priorities
+        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-priorities
         """
         raw_response = await self._client.request(
             method="GET",
@@ -93,7 +93,7 @@ class IssueRepository(EntityRepository):
         issue_id: str,
     ) -> list[Transition]:
         """
-        Yandex Cloud documentation for method: https://cloud.yandex.ru/docs/tracker/concepts/issues/get-transitions
+        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-transitions
         """
         raw_response = await self._client.request(
             method="GET",

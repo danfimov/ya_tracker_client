@@ -18,7 +18,7 @@ class QueueRepository(EntityRepository):
         issue_types_config: list[IssueTypeConfig],
     ) -> Queue:
         """
-        Yandex Cloud documentation for method: https://cloud.yandex.ru/docs/tracker/concepts/queues/create-queue
+        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/create-queue
         """
         raw_response = await self._client.request(
             method="POST",
@@ -36,7 +36,7 @@ class QueueRepository(EntityRepository):
 
     async def get_queue(self, queue_id: str | int) -> Queue:
         """
-        Yandex Cloud documentation for method: https://cloud.yandex.ru/docs/tracker/concepts/queues/get-queue
+        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/get-queue
         """
         raw_response = await self._client.request(
             method="GET",
@@ -46,7 +46,7 @@ class QueueRepository(EntityRepository):
 
     async def get_queues(self) -> list[Queue]:
         """
-        Yandex Cloud documentation for method: https://cloud.yandex.ru/docs/tracker/concepts/queues/get-queues
+        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/get-queues
         """
         raw_response = await self._client.request(
             method="GET",
@@ -56,7 +56,7 @@ class QueueRepository(EntityRepository):
 
     async def get_queue_versions(self, queue_id: str | int) -> list[QueueVersion]:
         """
-        Yandex Cloud documentation for method: https://cloud.yandex.ru/docs/tracker/concepts/queues/get-versions
+        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/get-versions
         """
         raw_response = await self._client.request(
             method="GET",
@@ -66,7 +66,7 @@ class QueueRepository(EntityRepository):
 
     async def get_queue_fields(self, queue_id: str | int) -> list[QueueField]:
         """
-        Yandex Cloud documentation for method: https://cloud.yandex.ru/docs/tracker/concepts/queues/get-fields
+        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/get-fields
         """
         raw_response = await self._client.request(
             method="GET",
@@ -81,7 +81,7 @@ class QueueRepository(EntityRepository):
 
     async def delete_queue(self, queue_id: str | int) -> None:
         """
-        Yandex Cloud documentation for method: https://cloud.yandex.ru/docs/tracker/concepts/queues/delete-queue
+        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/delete-queue
         """
         await self._client.request(
             method="DELETE",
@@ -90,7 +90,7 @@ class QueueRepository(EntityRepository):
 
     async def restore_queue(self, queue_id: str | int) -> Queue:
         """
-        Yandex Cloud documentation for method: https://cloud.yandex.ru/docs/tracker/concepts/queues/restore-queue
+        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/restore-queue
         """
         raw_response = await self._client.request(
             method="POST",
@@ -100,7 +100,7 @@ class QueueRepository(EntityRepository):
 
     async def delete_tag_in_queue(self, queue_id: str | int, tag_name: str) -> None:
         """
-        Yandex Cloud documentation for method: https://cloud.yandex.ru/docs/tracker/concepts/queues/delete-tag
+        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/delete-tag
         """
         await self._client.request(
             method="DELETE",

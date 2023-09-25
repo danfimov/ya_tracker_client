@@ -9,7 +9,7 @@ from ya_tracker_client.domain.entities.queue_field_suggest_provider import Queue
 
 
 class QueueField(AbstractEntity):
-    url: str = Field(validation_alias=AliasChoices("self", "url"))
+    url: str
     id: str
     name: str
     version: int
@@ -19,17 +19,11 @@ class QueueField(AbstractEntity):
     readonly: bool
     options: bool
     suggest: bool
-    options_provider: QueueFieldOptionsProvider | None = Field(  # TODO: not required in response - not documented
-        default=None, validation_alias=AliasChoices("optionsProvider", "options_provider"),
-    )
-    query_provider: QueueFieldQueryProvider | None = Field(
-        default=None, validation_alias=AliasChoices("queryProvider", "query_provider"),
-    )
+    options_provider: QueueFieldOptionsProvider | None = None  # TODO: not required in response - not documented
+    query_provider: QueueFieldQueryProvider | None = None
     order: int
 
     # TODO: documentation does not contain this fields
-    suggest_provider: QueueFieldSuggestProvider | None = Field(
-        default=None, validation_alias=AliasChoices("suggestProvider", "suggest_provider"),
-    )
+    suggest_provider: QueueFieldSuggestProvider | None = None
     type: str
     category: QueueFieldCategory

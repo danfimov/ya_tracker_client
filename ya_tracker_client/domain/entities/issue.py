@@ -1,7 +1,5 @@
 from datetime import datetime
 
-from pydantic import AliasChoices, Field
-
 from ya_tracker_client.domain.entities.base import AbstractEntity
 from ya_tracker_client.domain.entities.issue_type import IssueType
 from ya_tracker_client.domain.entities.priority import Priority
@@ -12,14 +10,14 @@ from ya_tracker_client.domain.entities.user import UserShort
 
 
 class IssueShort(AbstractEntity):
-    url: str = Field(validation_alias=AliasChoices("self", "url"))
+    url: str
     id: str
     key: str
     display: str
 
 
 class Issue(AbstractEntity):
-    url: str = Field(validation_alias=AliasChoices("self", "url"))
+    url: str
     id: str
     key: str
     version: int
@@ -39,8 +37,8 @@ class Issue(AbstractEntity):
     last_comment_update_at: datetime | None = None
     aliases: list[str] | None = None
     updated_by: UserShort | None = None
-    created_at: datetime = Field(validation_alias=AliasChoices("createdAt", "created_at"))
-    created_by: UserShort = Field(validation_alias=AliasChoices("createdBy", "created_by"))
+    created_at: datetime
+    created_by: UserShort
     votes: int
     updated_at: datetime | None = None
     status: Status
@@ -59,10 +57,7 @@ class IssueCreate(AbstractEntity):
     followers: list[UserShort | str] | None = None
     assignee: list[UserShort | str] | None = None
     unique: str | None = None
-    attachment_ids: list[str] | None = Field(
-        default=None,
-        validation_alias=AliasChoices("attachmentIds", "attachment_ids"),
-    )
+    attachment_ids: list[str] | None = None
 
 
 class IssueEdit(AbstractEntity):

@@ -1,3 +1,4 @@
+from ya_tracker_client.domain.repositories.checklist import ChecklistRepository
 from ya_tracker_client.domain.repositories.issue import IssueRepository
 from ya_tracker_client.domain.repositories.issue_relationship import IssueRelationshipRepository
 from ya_tracker_client.domain.repositories.queue import QueueRepository
@@ -10,6 +11,7 @@ class YaTrackerClient(
     IssueRepository,
     QueueRepository,
     UserRepository,
+    ChecklistRepository,
 ):
     def __init__(
         self,

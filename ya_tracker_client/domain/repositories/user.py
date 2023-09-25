@@ -12,7 +12,7 @@ logger = getLogger(__name__)
 class UserRepository(EntityRepository):
     async def get_myself(self) -> User:
         """
-        Yandex Cloud documentation for method: https://cloud.yandex.ru/docs/tracker/get-user-info
+        YC docs: https://cloud.yandex.com/en/docs/tracker/get-user-info
         """
         raw_response = await self._client.request(
             method="GET",
@@ -26,7 +26,7 @@ class UserRepository(EntityRepository):
         uid: int | None = None,
     ) -> User:
         """
-        Yandex Cloud documentation for method: https://cloud.yandex.ru/docs/tracker/get-user
+        YC docs: https://cloud.yandex.com/en/docs/tracker/get-user
         """
         if (login is None) and (uid is None):
             raise ClientError("Please provide login or uid for this request")
@@ -43,7 +43,7 @@ class UserRepository(EntityRepository):
 
     async def get_users(self) -> list[User]:
         """
-        Yandex Cloud documentation for method: https://cloud.yandex.ru/docs/tracker/get-users
+        YC docs: https://cloud.yandex.com/en/docs/tracker/get-users
         """
         raw_response = await self._client.request(
             method="GET",
