@@ -1,4 +1,3 @@
-
 from ya_tracker_client.domain.entities.base import AbstractEntity
 from ya_tracker_client.domain.entities.deadline import Deadline
 
@@ -19,4 +18,3 @@ class IssueWithoutChecklist(AbstractEntity):
     id: str
     key: str
     version: int
-

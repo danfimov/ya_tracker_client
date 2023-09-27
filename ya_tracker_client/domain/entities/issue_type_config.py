@@ -1,4 +1,3 @@
-
 from ya_tracker_client.domain.entities.base import AbstractEntity
 from ya_tracker_client.domain.entities.issue_type import IssueType
 from ya_tracker_client.domain.entities.resolution import ResolutionShort
