@@ -1,4 +1,3 @@
-from json import loads
 from logging import getLogger
 
 from ya_tracker_client.domain.client.errors import ClientError
@@ -18,7 +17,7 @@ class UserRepository(EntityRepository):
             method="GET",
             uri="/myself/",
         )
-        return User(**loads(raw_response))
+        return self.deserialize(raw_response, User)
 
     async def get_user(
         self,
@@ -39,7 +38,7 @@ class UserRepository(EntityRepository):
             method="GET",
             uri=f"/users/{login or uid}",
         )
-        return User(**loads(raw_response))
+        return self.deserialize(raw_response, User)
 
     async def get_users(self) -> list[User]:
         """
@@ -49,4 +48,4 @@ class UserRepository(EntityRepository):
             method="GET",
             uri="/users/",
         )
-        return [User(**raw_user) for raw_user in loads(raw_response)]
+        return self.deserialize(raw_response, User, plural=True)

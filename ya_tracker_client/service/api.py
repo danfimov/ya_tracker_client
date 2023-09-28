@@ -5,6 +5,7 @@ from ya_tracker_client.domain.repositories import (
     IssueRepository,
     QueueRepository,
     UserRepository,
+    WorklogRepository,
 )
 from ya_tracker_client.infrastructure.client import AiohttpClient
 
@@ -16,6 +17,7 @@ class YaTrackerClient(
     IssueRepository,
     QueueRepository,
     UserRepository,
+    WorklogRepository,
 ):
     def __init__(
         self,

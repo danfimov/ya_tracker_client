@@ -4,6 +4,7 @@ from ya_tracker_client.domain.repositories.issue import IssueRepository
 from ya_tracker_client.domain.repositories.issue_relationship import IssueRelationshipRepository
 from ya_tracker_client.domain.repositories.queue import QueueRepository
 from ya_tracker_client.domain.repositories.user import UserRepository
+from ya_tracker_client.domain.repositories.worklog import WorklogRepository
 
 
 __all__ = [
@@ -12,5 +13,6 @@ __all__ = [
     "IssueRelationshipRepository",
     "IssueRepository",
     "QueueRepository",
+    "WorklogRepository",
     "UserRepository",
 ]
