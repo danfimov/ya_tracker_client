@@ -16,7 +16,7 @@ class IssueRelationshipRepository(EntityRepository):
         relationship: IssueRelationshipTypeEnum,
     ) -> IssueRelationship:
         """
-        Yandex Cloud documentation for method: https://cloud.yandex.ru/docs/tracker/concepts/issues/link-issue
+        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/link-issue
         """
         raw_response = await self._client.request(
             method="POST",
@@ -33,7 +33,7 @@ class IssueRelationshipRepository(EntityRepository):
         issue_id: str,
     ) -> list[IssueRelationship]:
         """
-        Yandex Cloud documentation for method: https://cloud.yandex.ru/docs/tracker/concepts/issues/get-links
+        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-links
         """
         raw_response = await self._client.request(
             method="GET",
@@ -47,7 +47,7 @@ class IssueRelationshipRepository(EntityRepository):
         link_id: int,
     ) -> None:
         """
-        Yandex Cloud documentation for method: https://cloud.yandex.ru/docs/tracker/concepts/issues/delete-link-issue
+        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/delete-link-issue
         """
         await self._client.request(
             method="DELETE",

@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 from http import HTTPStatus
-from json import dumps
 from logging import getLogger
 from typing import Any
 
@@ -14,6 +13,7 @@ from ya_tracker_client.domain.client.errors import (
     ClientObjectNotFoundError,
     ClientSufficientRightsError,
 )
+from ya_tracker_client.utils import serialize_entity
 
 
 logger = getLogger(__name__)
@@ -60,7 +60,7 @@ class BaseClient(ABC):
         uri = f"{self._base_url}/{self._api_version}{uri}"
 
         bytes_payload = BytesPayload(
-            value=bytes(dumps(payload), encoding="utf-8"),
+            value=bytes(serialize_entity(payload), encoding="utf-8"),
             content_type="application/json",
         )
 

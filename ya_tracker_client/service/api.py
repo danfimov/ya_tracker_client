@@ -1,7 +1,10 @@
-from ya_tracker_client.domain.repositories.issue import IssueRepository
-from ya_tracker_client.domain.repositories.issue_relationship import IssueRelationshipRepository
-from ya_tracker_client.domain.repositories.queue import QueueRepository
-from ya_tracker_client.domain.repositories.user import UserRepository
+from ya_tracker_client.domain.repositories import (
+    ChecklistRepository,
+    IssueRelationshipRepository,
+    IssueRepository,
+    QueueRepository,
+    UserRepository,
+)
 from ya_tracker_client.infrastructure.client import AiohttpClient
 
 
@@ -10,6 +13,7 @@ class YaTrackerClient(
     IssueRepository,
     QueueRepository,
     UserRepository,
+    ChecklistRepository,
 ):
     def __init__(
         self,

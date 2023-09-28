@@ -1,8 +1,6 @@
 from datetime import datetime
 from enum import Enum
 
-from pydantic import AliasChoices, Field
-
 from ya_tracker_client.domain.entities.base import AbstractEntity
 from ya_tracker_client.domain.entities.issue import IssueShort
 from ya_tracker_client.domain.entities.issue_status import IssueStatus
@@ -22,22 +20,22 @@ class IssueRelationshipTypeEnum(str, Enum):
 
 
 class IssueRelationshipType(AbstractEntity):
-    url: str = Field(validation_alias=AliasChoices("self", "url"))
+    url: str
     id: str
     inward: str
     outward: str
 
 
 class IssueRelationship(AbstractEntity):
-    url: str = Field(validation_alias=AliasChoices("self", "url"))
+    url: str
     id: int
     type: IssueRelationshipType
     direction: str
     object: IssueShort
-    created_at: datetime = Field(validation_alias=AliasChoices("createdAt", "created_at"))
-    updated_at: datetime = Field(validation_alias=AliasChoices("updatedAt", "updated_at"))
-    created_by: UserShort = Field(validation_alias=AliasChoices("createdBy", "created_by"))
-    updated_by: UserShort = Field(validation_alias=AliasChoices("updatedBy", "updated_by"))
+    created_at: datetime
+    updated_at: datetime
+    created_by: UserShort
+    updated_by: UserShort
     assignee: UserShort | None = None
     status: IssueStatus
 

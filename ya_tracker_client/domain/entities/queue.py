@@ -1,4 +1,4 @@
-from pydantic import AliasChoices, Field
+from pydantic import Field
 
 from ya_tracker_client.domain.entities.base import AbstractEntity
 from ya_tracker_client.domain.entities.issue_type import IssueType
@@ -14,55 +14,42 @@ class QueueIdentifier(AbstractEntity):
 
 
 class QueueShort(AbstractEntity):
-    url: str = Field(validation_alias=AliasChoices("self", "url"))
+    url: str
     id: str
     key: str
     display: str
 
 
 class QueueVersion(AbstractEntity):
-    url: str = Field(validation_alias=AliasChoices("self", "url"))
+    url: str
     id: str
     display: str
 
 
 class Queue(AbstractEntity):
-    url: str = Field(validation_alias=AliasChoices("self", "url"))
+    url: str
     id: int
     key: str
     version: int
     name: str
     description: str | None = None  # TODO: string in documentation, but may be missing in response - TB145879
     lead: UserShort
-    assign_auto: bool = Field(validation_alias=AliasChoices("assignAuto", "assign_auto"))
-    default_type: IssueType = Field(validation_alias=AliasChoices("defaultType", "default_type"))
-    default_priority: Priority = Field(validation_alias=AliasChoices("defaultPriority", "default_priority"))
-    team_users: list[UserShort] = Field(default=list, validation_alias=AliasChoices("teamUsers", "team_users"))
-    issue_types: list[IssueType] = Field(default=list, validation_alias=AliasChoices("issueTypes", "issue_types"))
-    versions: list[QueueVersion] = Field(default=list)
-    workflows: list[WorkflowShort] = Field(default=list)
-    deny_voting: bool = Field(validation_alias=AliasChoices("denyVoting", "deny_voting"))
-    issue_types_config: list[IssueTypeConfig] = Field(
-        default=list,
-        validation_alias=AliasChoices("issueTypesConfig", "issue_types_config"),
-    )
+    assign_auto: bool
+    default_type: IssueType
+    default_priority: Priority
+    team_users: list[UserShort] = Field(default_factory=list)
+    issue_types: list[IssueType] = Field(default_factory=list)
+    versions: list[QueueVersion] = Field(default_factory=list)
+    workflows: list[WorkflowShort] = Field(default_factory=list)
+    deny_voting: bool
+    issue_types_config: list[IssueTypeConfig] = Field(default_factory=list)
 
     # TODO: documentation does not contain this fields - TB145879
-    deny_conductor_autolink: bool = Field(
-        validation_alias=AliasChoices("denyConductorAutolink", "deny_conductor_autolink"),
-    )
-    deny_tracker_auto_link: bool = Field(
-        validation_alias=AliasChoices("denyTrackerAutolink", "deny_tracker_auto_link"),
-    )
-    use_component_permissions_intersection: bool = Field(
-        validation_alias=AliasChoices("useComponentPermissionsIntersection", "use_component_permissions_intersection"),
-    )
-    workflow_actions_style: str = Field(
-        validation_alias=AliasChoices("workflowActionsStyle", "workflow_actions_style"),
-    )
-    use_last_signature: bool = Field(
-        validation_alias=AliasChoices("useLastSignature", "use_last_signature"),
-    )
+    deny_conductor_autolink: bool | None = None
+    deny_tracker_auto_link: bool | None = None
+    use_component_permissions_intersection: bool | None = None
+    workflow_actions_style: str | None = None
+    use_last_signature: bool | None = None
 
 
 class QueueCreate(AbstractEntity):
@@ -70,10 +57,5 @@ class QueueCreate(AbstractEntity):
     name: str
     lead: str
     default_type: str
-    default_priority: str = Field(
-        validation_alias=AliasChoices("defaultPriority", "default_priority"),
-    )
-    issue_types_config: list[IssueTypeConfig] = Field(
-        default=list,
-        validation_alias=AliasChoices("issueTypesConfig", "issue_types_config"),
-    )
+    default_priority: str
+    issue_types_config: list[IssueTypeConfig] = Field(default_factory=list)
