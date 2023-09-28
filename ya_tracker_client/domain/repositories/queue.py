@@ -72,11 +72,6 @@ class QueueRepository(EntityRepository):
             method="GET",
             uri=f"/queues/{queue_id}/fields",
         )
-        for raw_queue_field in loads(raw_response):
-            print(*raw_queue_field.items(), sep="\n")
-            print()
-            QueueField(**raw_queue_field)
-
         return [QueueField(**raw_queue_field) for raw_queue_field in loads(raw_response)]
 
     async def delete_queue(self, queue_id: str | int) -> None:

@@ -1,6 +1,10 @@
 from datetime import datetime
 
+from pydantic import Field
+
 from ya_tracker_client.domain.entities.base import AbstractEntity
+from ya_tracker_client.domain.entities.checklist import ChecklistItem
+from ya_tracker_client.domain.entities.issue_status import IssueStatus
 from ya_tracker_client.domain.entities.issue_type import IssueType
 from ya_tracker_client.domain.entities.priority import Priority
 from ya_tracker_client.domain.entities.queue import QueueIdentifier, QueueShort
@@ -68,3 +72,34 @@ class IssueEdit(AbstractEntity):
     type: IssueType | None = None
     priority: Priority | None = None
     followers: list[UserShort | str] | None = None
+
+
+class IssueWithChecklist(AbstractEntity):
+    url: str
+    id: str
+    key: str
+    version: int
+
+    summary: str
+    description: str | None = None
+    type: IssueType
+    priority: Priority
+    followers: list[UserShort] | None = None
+    queue: QueueShort
+    favorite: bool
+    assignee: UserShort | None = None
+
+    last_comment_updated_at: datetime | None = None
+    pending_reply_from: UserShort | None = None
+    created_at: datetime
+    updated_at: datetime
+    created_by: UserShort
+    updated_by: UserShort | None = None
+    votes: int
+    status: IssueStatus
+    previous_status: IssueStatus | None = None
+    status_start_time: datetime
+    previous_status_last_assignee: UserShort | None = None
+    deadline: datetime | None = None
+
+    checklist_items: list[ChecklistItem] = Field(default_factory=list)
