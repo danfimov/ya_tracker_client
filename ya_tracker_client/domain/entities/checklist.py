@@ -1,4 +1,3 @@
-
 from ya_tracker_client.domain.entities.base import AbstractEntity
 from ya_tracker_client.domain.entities.deadline import Deadline
 from ya_tracker_client.domain.entities.user import UserShort

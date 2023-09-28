@@ -1,5 +1,6 @@
 from ya_tracker_client.domain.repositories import (
     ChecklistRepository,
+    ComponentRepository,
     IssueRelationshipRepository,
     IssueRepository,
     QueueRepository,
@@ -9,11 +10,12 @@ from ya_tracker_client.infrastructure.client import AiohttpClient
 
 
 class YaTrackerClient(
+    ChecklistRepository,
+    ComponentRepository,
     IssueRelationshipRepository,
     IssueRepository,
     QueueRepository,
     UserRepository,
-    ChecklistRepository,
 ):
     def __init__(
         self,
