@@ -1,5 +1,3 @@
-from json import loads
-
 from ya_tracker_client.domain.entities.checklist import ChecklistCreate, ChecklistItem, ChecklistItemEdit
 from ya_tracker_client.domain.entities.deadline import Deadline
 from ya_tracker_client.domain.entities.issue import IssueWithChecklist
@@ -30,7 +28,7 @@ class ChecklistRepository(EntityRepository):
                 deadline=deadline,
             ).model_dump(exclude_none=True, by_alias=True),
         )
-        return IssueWithChecklist(**loads(raw_response))
+        return self.deserialize(raw_response, IssueWithChecklist)
 
     async def get_checklist_items(self, issue_id: str) -> list[ChecklistItem]:
         """
@@ -42,7 +40,7 @@ class ChecklistRepository(EntityRepository):
             method="GET",
             uri=f"/issues/{issue_id}/checklistItems",
         )
-        return [ChecklistItem(**raw_checklist_item) for raw_checklist_item in loads(raw_response)]
+        return self.deserialize(raw_response, ChecklistItem, plural=True)
 
     async def edit_checklist_item(
         self,
@@ -66,7 +64,7 @@ class ChecklistRepository(EntityRepository):
                 deadline=deadline,
             ).model_dump(exclude_none=True, by_alias=True),
         )
-        return IssueWithChecklist(**loads(raw_response))
+        return self.deserialize(raw_response, IssueWithChecklist)
 
     async def delete_checklist(self, issue_id: str) -> IssueWithChecklist:
         """
@@ -76,7 +74,7 @@ class ChecklistRepository(EntityRepository):
             method="DELETE",
             uri=f"/issues/{issue_id}/checklistItems",
         )
-        return IssueWithChecklist(**loads(raw_response))
+        return self.deserialize(raw_response, IssueWithChecklist)
 
     async def delete_checklist_item(self, issue_id: str, checklist_item_id: str):
         """
@@ -86,4 +84,4 @@ class ChecklistRepository(EntityRepository):
             method="DELETE",
             uri=f"/issues/{issue_id}/checklistItems/{checklist_item_id}",
         )
-        return IssueWithChecklist(**loads(raw_response))
+        return self.deserialize(raw_response, IssueWithChecklist)

@@ -1,5 +1,3 @@
-from json import loads
-
 from ya_tracker_client.domain.entities.issue_relationship import (
     IssueRelationship,
     IssueRelationshipCreate,
@@ -26,7 +24,7 @@ class IssueRelationshipRepository(EntityRepository):
                 relationship=relationship,
             ).model_dump(exclude_none=True, by_alias=True),
         )
-        return IssueRelationship(**loads(raw_response))
+        return self.deserialize(raw_response, IssueRelationship)
 
     async def get_issue_relationships(
         self,
@@ -39,7 +37,7 @@ class IssueRelationshipRepository(EntityRepository):
             method="GET",
             uri=f"/issues/{issue_id}/links",
         )
-        return [IssueRelationship(**raw_issue_relationship) for raw_issue_relationship in loads(raw_response)]
+        return self.deserialize(raw_response, IssueRelationship, plural=True)
 
     async def delete_issue_relationships(
         self,

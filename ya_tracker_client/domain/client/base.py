@@ -57,8 +57,6 @@ class BaseClient(ABC):
         params: dict[str, Any] | None = None,
         payload: dict[str, Any] | None = None,
     ) -> bytes:
-        uri = f"{self._base_url}/{self._api_version}{uri}"
-
         bytes_payload = BytesPayload(
             value=bytes(serialize_entity(payload), encoding="utf-8"),
             content_type="application/json",
@@ -66,7 +64,7 @@ class BaseClient(ABC):
 
         status, body = await self._make_request(
             method=method,
-            url=uri,
+            url=f"{self._base_url}/{self._api_version}{uri}",
             params=params,
             data=bytes_payload,
         )

@@ -1,5 +1,3 @@
-from json import loads
-
 from ya_tracker_client.domain.entities.component import Component
 from ya_tracker_client.domain.repositories.base import EntityRepository
 
@@ -13,4 +11,4 @@ class ComponentRepository(EntityRepository):
             method="GET",
             uri="/components",
         )
-        return [Component(**raw_component) for raw_component in loads(raw_response)]
+        return self.deserialize(raw_response, Component, plural=True)

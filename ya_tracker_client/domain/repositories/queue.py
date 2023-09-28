@@ -1,5 +1,3 @@
-from json import loads
-
 from ya_tracker_client.domain.entities.issue_type_config import IssueTypeConfig
 from ya_tracker_client.domain.entities.queue import Queue, QueueCreate
 from ya_tracker_client.domain.entities.queue_field import QueueField
@@ -32,7 +30,7 @@ class QueueRepository(EntityRepository):
                 issue_types_config=issue_types_config,
             ).model_dump(exclude_none=True, by_alias=True),
         )
-        return Queue(**loads(raw_response))
+        return self.deserialize(raw_response, Queue)
 
     async def get_queue(self, queue_id: str | int) -> Queue:
         """
@@ -42,7 +40,7 @@ class QueueRepository(EntityRepository):
             method="GET",
             uri=f"/queues/{queue_id}",
         )
-        return Queue(**loads(raw_response))
+        return self.deserialize(raw_response, Queue)
 
     async def get_queues(self) -> list[Queue]:
         """
@@ -52,7 +50,7 @@ class QueueRepository(EntityRepository):
             method="GET",
             uri="/queues/",
         )
-        return [Queue(**raw_queue) for raw_queue in loads(raw_response)]
+        return self.deserialize(raw_response, Queue, plural=True)
 
     async def get_queue_versions(self, queue_id: str | int) -> list[QueueVersion]:
         """
@@ -62,7 +60,7 @@ class QueueRepository(EntityRepository):
             method="GET",
             uri=f"/queues/{queue_id}/versions",
         )
-        return [QueueVersion(**raw_queue_version) for raw_queue_version in loads(raw_response)]
+        return self.deserialize(raw_response, QueueVersion, plural=True)
 
     async def get_queue_fields(self, queue_id: str | int) -> list[QueueField]:
         """
@@ -72,7 +70,7 @@ class QueueRepository(EntityRepository):
             method="GET",
             uri=f"/queues/{queue_id}/fields",
         )
-        return [QueueField(**raw_queue_field) for raw_queue_field in loads(raw_response)]
+        return self.deserialize(raw_response, QueueField, plural=True)
 
     async def delete_queue(self, queue_id: str | int) -> None:
         """
@@ -91,7 +89,7 @@ class QueueRepository(EntityRepository):
             method="POST",
             uri=f"/queues/{queue_id}/_restore",
         )
-        return Queue(**loads(raw_response))
+        return self.deserialize(raw_response, Queue)
 
     async def delete_tag_in_queue(self, queue_id: str | int, tag_name: str) -> None:
         """
