@@ -9,7 +9,7 @@ from ya_tracker_client.domain.repositories.base import EntityRepository
 class AttachmentRepository(EntityRepository):
     async def get_attachments_list(self, issue_id: str) -> list[Attachment]:
         """
-        Use this request to get a list of files attached to an issue and to comments below it.
+        Use this method to get a list of files attached to an issue and to comments below it.
 
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-attachments-list
         """
@@ -26,7 +26,7 @@ class AttachmentRepository(EntityRepository):
         filename: str,
     ) -> bytes:
         """
-        Use this request to download files attached to issues.
+        Use this method to download files attached to issues.
 
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-attachment
         """
@@ -78,7 +78,7 @@ class AttachmentRepository(EntityRepository):
         """
         Upload temporary file.
 
-        Use this request to upload a file to Tracker first, and then
+        Use this method to upload a file to Tracker first, and then
         attach it when creating an issue or adding a comment.
 
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/temp-attachment

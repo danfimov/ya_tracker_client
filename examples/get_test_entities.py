@@ -31,6 +31,7 @@ async def main() -> None:
     await client.get_worklog("TRACKER-1")
     await client.get_worklog_records_by_parameters(me.login)
     await client.get_attachments_list('TRACKER-1')
+    await client.get_issue_comments('TRACKER-1')
 
     await client.stop()
 

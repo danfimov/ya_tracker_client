@@ -1,6 +1,7 @@
 from ya_tracker_client.domain.repositories import (
     AttachmentRepository,
     ChecklistRepository,
+    CommentRepository,
     ComponentRepository,
     IssueRelationshipRepository,
     IssueRepository,
@@ -13,6 +14,7 @@ from ya_tracker_client.infrastructure.client import AiohttpClient
 
 class YaTrackerClient(
     AttachmentRepository,
+    CommentRepository,
     ChecklistRepository,
     ComponentRepository,
     IssueRelationshipRepository,
