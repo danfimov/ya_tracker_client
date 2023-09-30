@@ -19,7 +19,18 @@ async def main() -> None:
         oauth_token=API_TOKEN,
     )
 
-    ...
+    # requests for tests
+    me = await client.get_myself()
+    await client.get_user(uid=me.uid)
+    await client.get_users()
+    await client.get_issue('TRACKER-1')
+    await client.get_queue('TRACKER')
+    await client.get_issue_relationships('TRACKER-1')
+    await client.get_checklist_items("TRACKER-1")
+    await client.get_components()
+    await client.get_worklog("TRACKER-1")
+    await client.get_worklog_records_by_parameters(me.login)
+    await client.get_attachments_list('TRACKER-1')
 
     await client.stop()
 

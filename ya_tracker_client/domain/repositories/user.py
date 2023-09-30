@@ -17,7 +17,7 @@ class UserRepository(EntityRepository):
             method="GET",
             uri="/myself/",
         )
-        return self.deserialize(raw_response, User)
+        return self._decode(raw_response, User)
 
     async def get_user(
         self,
@@ -38,7 +38,7 @@ class UserRepository(EntityRepository):
             method="GET",
             uri=f"/users/{login or uid}",
         )
-        return self.deserialize(raw_response, User)
+        return self._decode(raw_response, User)
 
     async def get_users(self) -> list[User]:
         """
@@ -48,4 +48,4 @@ class UserRepository(EntityRepository):
             method="GET",
             uri="/users/",
         )
-        return self.deserialize(raw_response, User, plural=True)
+        return self._decode(raw_response, User, plural=True)

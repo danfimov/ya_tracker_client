@@ -8,7 +8,7 @@ from ya_tracker_client.infrastructure.client import BaseClient
 
 class DeserializationMixin:
     @staticmethod
-    def deserialize(
+    def _decode(
         value: bytes,
         return_type: Type[BaseModel] | None = None,
         plural: bool = False,

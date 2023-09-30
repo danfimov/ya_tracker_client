@@ -17,7 +17,7 @@ class IssueRepository(EntityRepository):
             method="GET",
             uri=f"/issues/{issue_id}",
         )
-        return self.deserialize(raw_response, Issue)
+        return self._decode(raw_response, Issue)
 
     async def create_issue(
         self,
@@ -53,7 +53,7 @@ class IssueRepository(EntityRepository):
                 attachment_ids=attachment_ids,
             ).model_dump(exclude_none=True, by_alias=True),
         )
-        return self.deserialize(raw_response, Issue)
+        return self._decode(raw_response, Issue)
 
     async def edit_issue(
         self,
@@ -70,7 +70,7 @@ class IssueRepository(EntityRepository):
             params={"version": version} if version is not None else None,
             payload=IssueEdit(**kwargs).model_dump(exclude_unset=True),
         )
-        return self.deserialize(raw_response, Issue)
+        return self._decode(raw_response, Issue)
 
     async def get_priorities(
         self,
@@ -84,7 +84,7 @@ class IssueRepository(EntityRepository):
             uri="/priorities/",
             params={"localized": str(localized)},
         )
-        return self.deserialize(raw_response, Priority)
+        return self._decode(raw_response, Priority)
 
     async def get_issue_transitions(
         self,
@@ -97,4 +97,4 @@ class IssueRepository(EntityRepository):
             method="GET",
             uri=f"/issues/{issue_id}/transitions/",
         )
-        return self.deserialize(raw_response, Transition, plural=True)
+        return self._decode(raw_response, Transition, plural=True)

@@ -2,7 +2,7 @@ from logging import getLogger
 from ssl import create_default_context
 from typing import Any
 
-from aiohttp import BytesPayload, ClientSession, ClientTimeout, TCPConnector
+from aiohttp import BytesPayload, ClientSession, ClientTimeout, FormData, TCPConnector
 from certifi import where
 
 from ya_tracker_client.domain.client import BaseClient
@@ -51,7 +51,7 @@ class AiohttpClient(BaseClient):
         method: str,
         url: str,
         params: dict[str, Any] | None = None,
-        data: bytes | BytesPayload | None = None,
+        data: bytes | BytesPayload | FormData | None = None,
     ) -> tuple[int, bytes]:
         session = self._get_session()
         async with session.request(method, url, params=params, data=data) as response:

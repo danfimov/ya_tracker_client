@@ -25,7 +25,7 @@ class WorklogRepository(EntityRepository):
                 comment=comment,
             ).model_dump(exclude_none=True, by_alias=True),
         )
-        return self.deserialize(raw_response, Worklog)
+        return self._decode(raw_response, Worklog)
 
     async def edit_worklog_record(
         self,
@@ -45,7 +45,7 @@ class WorklogRepository(EntityRepository):
                 comment=comment,
             ).model_dump(exclude_none=True, by_alias=True),
         )
-        return self.deserialize(raw_response, Worklog)
+        return self._decode(raw_response, Worklog)
 
     async def delete_worklog_record(
         self,
@@ -68,7 +68,7 @@ class WorklogRepository(EntityRepository):
             method="GET",
             uri=f"/issues/{issue_id}/worklog",
         )
-        return self.deserialize(raw_response, Worklog, plural=True)
+        return self._decode(raw_response, Worklog, plural=True)
 
     async def get_worklog_records_by_parameters(
         self,
@@ -94,4 +94,4 @@ class WorklogRepository(EntityRepository):
             uri="/worklog/_search",
             payload=payload,
         )
-        return self.deserialize(raw_response, Worklog, plural=True)
+        return self._decode(raw_response, Worklog, plural=True)
