@@ -13,8 +13,15 @@ API docs: https://cloud.yandex.com/en/docs/tracker/about-api
 ## Installation
 
 ```shell
-pip install ya_tracker_clint
+pip install ya_tracker_client
 ```
+
+or 
+
+```shell
+poetry add ya_tracker_client
+```
+
 
 ## Usage
 
