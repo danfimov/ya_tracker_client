@@ -1,10 +1,15 @@
 from ya_tracker_client.domain.repositories import (
     AttachmentRepository,
+    BulkOperationRepository,
     ChecklistRepository,
     CommentRepository,
     ComponentRepository,
+    ExternalLinkRepository,
+    ImportingRepository,
+    IssueFieldRepository,
     IssueRelationshipRepository,
     IssueRepository,
+    MacrosRepository,
     ProjectRepository,
     QueueRepository,
     UserRepository,
@@ -15,15 +20,20 @@ from ya_tracker_client.infrastructure.client import AiohttpClient
 
 class YaTrackerClient(
     AttachmentRepository,
-    CommentRepository,
+    BulkOperationRepository,
     ChecklistRepository,
+    CommentRepository,
     ComponentRepository,
+    ExternalLinkRepository,
+    ImportingRepository,
+    IssueFieldRepository,
     IssueRelationshipRepository,
     IssueRepository,
+    MacrosRepository,
+    ProjectRepository,
     QueueRepository,
     UserRepository,
     WorklogRepository,
-    ProjectRepository,
 ):
     def __init__(
         self,

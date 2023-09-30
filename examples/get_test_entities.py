@@ -33,6 +33,8 @@ async def main() -> None:
     await client.get_attachments_list('TRACKER-1')
     await client.get_issue_comments('TRACKER-1')
     await client.get_projects_list(expand='queues')
+    await client.get_external_applications()
+    await client.get_external_links("TRACKER-1")
 
     await client.stop()
 
