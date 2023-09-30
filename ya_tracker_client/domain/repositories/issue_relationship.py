@@ -24,7 +24,7 @@ class IssueRelationshipRepository(EntityRepository):
                 relationship=relationship,
             ).model_dump(exclude_none=True, by_alias=True),
         )
-        return self.deserialize(raw_response, IssueRelationship)
+        return self._decode(raw_response, IssueRelationship)
 
     async def get_issue_relationships(
         self,
@@ -37,7 +37,7 @@ class IssueRelationshipRepository(EntityRepository):
             method="GET",
             uri=f"/issues/{issue_id}/links",
         )
-        return self.deserialize(raw_response, IssueRelationship, plural=True)
+        return self._decode(raw_response, IssueRelationship, plural=True)
 
     async def delete_issue_relationships(
         self,

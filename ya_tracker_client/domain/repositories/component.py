@@ -11,4 +11,4 @@ class ComponentRepository(EntityRepository):
             method="GET",
             uri="/components",
         )
-        return self.deserialize(raw_response, Component, plural=True)
+        return self._decode(raw_response, Component, plural=True)

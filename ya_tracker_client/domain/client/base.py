@@ -3,7 +3,7 @@ from http import HTTPStatus
 from logging import getLogger
 from typing import Any
 
-from aiohttp import BytesPayload
+from aiohttp import BytesPayload, FormData
 
 from ya_tracker_client.domain.client.errors import (
     ClientAuthError,
@@ -56,11 +56,15 @@ class BaseClient(ABC):
         uri: str,
         params: dict[str, Any] | None = None,
         payload: dict[str, Any] | None = None,
+        form: FormData | None = None,
     ) -> bytes:
-        bytes_payload = BytesPayload(
-            value=bytes(serialize_entity(payload), encoding="utf-8"),
-            content_type="application/json",
-        )
+        if form:
+            bytes_payload = form
+        else:
+            bytes_payload = BytesPayload(
+                value=bytes(serialize_entity(payload), encoding="utf-8"),
+                content_type="application/json",
+            )
 
         status, body = await self._make_request(
             method=method,
@@ -77,7 +81,7 @@ class BaseClient(ABC):
         method: str,
         url: str,
         params: dict[str, Any] | None = None,
-        data: bytes | BytesPayload | None = None,
+        data: bytes | BytesPayload | FormData | None = None,
     ) -> tuple[int, bytes]:
         """
         Get raw response from via http-client.

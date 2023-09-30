@@ -28,7 +28,7 @@ class ChecklistRepository(EntityRepository):
                 deadline=deadline,
             ).model_dump(exclude_none=True, by_alias=True),
         )
-        return self.deserialize(raw_response, IssueWithChecklist)
+        return self._decode(raw_response, IssueWithChecklist)
 
     async def get_checklist_items(self, issue_id: str) -> list[ChecklistItem]:
         """
@@ -40,7 +40,7 @@ class ChecklistRepository(EntityRepository):
             method="GET",
             uri=f"/issues/{issue_id}/checklistItems",
         )
-        return self.deserialize(raw_response, ChecklistItem, plural=True)
+        return self._decode(raw_response, ChecklistItem, plural=True)
 
     async def edit_checklist_item(
         self,
@@ -64,7 +64,7 @@ class ChecklistRepository(EntityRepository):
                 deadline=deadline,
             ).model_dump(exclude_none=True, by_alias=True),
         )
-        return self.deserialize(raw_response, IssueWithChecklist)
+        return self._decode(raw_response, IssueWithChecklist)
 
     async def delete_checklist(self, issue_id: str) -> IssueWithChecklist:
         """
@@ -74,7 +74,7 @@ class ChecklistRepository(EntityRepository):
             method="DELETE",
             uri=f"/issues/{issue_id}/checklistItems",
         )
-        return self.deserialize(raw_response, IssueWithChecklist)
+        return self._decode(raw_response, IssueWithChecklist)
 
     async def delete_checklist_item(self, issue_id: str, checklist_item_id: str):
         """
@@ -84,4 +84,4 @@ class ChecklistRepository(EntityRepository):
             method="DELETE",
             uri=f"/issues/{issue_id}/checklistItems/{checklist_item_id}",
         )
-        return self.deserialize(raw_response, IssueWithChecklist)
+        return self._decode(raw_response, IssueWithChecklist)

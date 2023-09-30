@@ -30,7 +30,7 @@ class QueueRepository(EntityRepository):
                 issue_types_config=issue_types_config,
             ).model_dump(exclude_none=True, by_alias=True),
         )
-        return self.deserialize(raw_response, Queue)
+        return self._decode(raw_response, Queue)
 
     async def get_queue(self, queue_id: str | int) -> Queue:
         """
@@ -40,7 +40,7 @@ class QueueRepository(EntityRepository):
             method="GET",
             uri=f"/queues/{queue_id}",
         )
-        return self.deserialize(raw_response, Queue)
+        return self._decode(raw_response, Queue)
 
     async def get_queues(self) -> list[Queue]:
         """
@@ -50,7 +50,7 @@ class QueueRepository(EntityRepository):
             method="GET",
             uri="/queues/",
         )
-        return self.deserialize(raw_response, Queue, plural=True)
+        return self._decode(raw_response, Queue, plural=True)
 
     async def get_queue_versions(self, queue_id: str | int) -> list[QueueVersion]:
         """
@@ -60,7 +60,7 @@ class QueueRepository(EntityRepository):
             method="GET",
             uri=f"/queues/{queue_id}/versions",
         )
-        return self.deserialize(raw_response, QueueVersion, plural=True)
+        return self._decode(raw_response, QueueVersion, plural=True)
 
     async def get_queue_fields(self, queue_id: str | int) -> list[QueueField]:
         """
@@ -70,7 +70,7 @@ class QueueRepository(EntityRepository):
             method="GET",
             uri=f"/queues/{queue_id}/fields",
         )
-        return self.deserialize(raw_response, QueueField, plural=True)
+        return self._decode(raw_response, QueueField, plural=True)
 
     async def delete_queue(self, queue_id: str | int) -> None:
         """
@@ -89,7 +89,7 @@ class QueueRepository(EntityRepository):
             method="POST",
             uri=f"/queues/{queue_id}/_restore",
         )
-        return self.deserialize(raw_response, Queue)
+        return self._decode(raw_response, Queue)
 
     async def delete_tag_in_queue(self, queue_id: str | int, tag_name: str) -> None:
         """
