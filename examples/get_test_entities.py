@@ -35,6 +35,7 @@ async def main() -> None:
     await client.get_projects_list(expand='queues')
     await client.get_external_applications()
     await client.get_external_links("TRACKER-1")
+    await client.get_macros('TRACKER')
 
     await client.stop()
 

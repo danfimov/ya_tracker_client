@@ -8,7 +8,7 @@ from ya_tracker_client.domain.repositories.importing import ImportingRepository
 from ya_tracker_client.domain.repositories.issue import IssueRepository
 from ya_tracker_client.domain.repositories.issue_field import IssueFieldRepository
 from ya_tracker_client.domain.repositories.issue_relationship import IssueRelationshipRepository
-from ya_tracker_client.domain.repositories.macros import MacrosRepository
+from ya_tracker_client.domain.repositories.macro import MacroRepository
 from ya_tracker_client.domain.repositories.project import ProjectRepository
 from ya_tracker_client.domain.repositories.queue import QueueRepository
 from ya_tracker_client.domain.repositories.user import UserRepository
@@ -26,7 +26,7 @@ __all__ = [
     "IssueFieldRepository",
     "IssueRelationshipRepository",
     "IssueRepository",
-    "MacrosRepository",
+    "MacroRepository",
     "ProjectRepository",
     "QueueRepository",
     "UserRepository",
