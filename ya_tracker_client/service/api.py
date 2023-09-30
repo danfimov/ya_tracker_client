@@ -5,6 +5,7 @@ from ya_tracker_client.domain.repositories import (
     ComponentRepository,
     IssueRelationshipRepository,
     IssueRepository,
+    ProjectRepository,
     QueueRepository,
     UserRepository,
     WorklogRepository,
@@ -22,6 +23,7 @@ class YaTrackerClient(
     QueueRepository,
     UserRepository,
     WorklogRepository,
+    ProjectRepository,
 ):
     def __init__(
         self,
