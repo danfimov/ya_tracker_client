@@ -2,7 +2,7 @@ from logging import getLogger
 from ssl import create_default_context
 from typing import Any
 
-from aiohttp import BytesPayload, ClientSession, ClientTimeout, TCPConnector, FormData
+from aiohttp import BytesPayload, ClientSession, ClientTimeout, FormData, TCPConnector
 from certifi import where
 
 from ya_tracker_client.domain.client import BaseClient

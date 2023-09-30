@@ -2,8 +2,8 @@ from typing import BinaryIO
 
 from aiohttp import FormData
 
-from ya_tracker_client.domain.repositories.base import EntityRepository
 from ya_tracker_client.domain.entities.attachment import Attachment
+from ya_tracker_client.domain.repositories.base import EntityRepository
 
 
 class AttachmentRepository(EntityRepository):
@@ -14,7 +14,7 @@ class AttachmentRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-attachments-list
         """
         raw_response = await self._client.request(
-            method='GET',
+            method="GET",
             uri=f"/issues/{issue_id}/attachments",
         )
         return self._decode(raw_response, Attachment, plural=True)
@@ -23,7 +23,7 @@ class AttachmentRepository(EntityRepository):
         self,
         issue_id: str,
         attachment_id: str | int,
-        filename: str
+        filename: str,
     ) -> bytes:
         """
         Use this request to download files attached to issues.
@@ -31,7 +31,7 @@ class AttachmentRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-attachment
         """
         return await self._client.request(
-            method='GET',
+            method="GET",
             uri=f"/issues/{issue_id}/attachments/{attachment_id}/{filename}",
         )
 
