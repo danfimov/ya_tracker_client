@@ -3,6 +3,7 @@ from abc import ABCMeta
 import pydantic
 from pydantic import BaseModel, ConfigDict
 
+
 if int(pydantic.VERSION[0]) == 2:
     from pydantic.alias_generators import to_camel
 else:
@@ -17,8 +18,8 @@ else:
         :return: The converted camelCase string.
         """
         camel = snake.title()
-        camel = sub('([0-9A-Za-z])_(?=[0-9A-Z])', lambda m: m.group(1), camel)  # to PascalCase first
-        return sub('(^_*[A-Z])', lambda m: m.group(1).lower(), camel)
+        camel = sub("([0-9A-Za-z])_(?=[0-9A-Z])", lambda m: m.group(1), camel)  # to PascalCase first
+        return sub("(^_*[A-Z])", lambda m: m.group(1).lower(), camel)
 
 
 def tracker_alias_generator(s: str) -> str:
