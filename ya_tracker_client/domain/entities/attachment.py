@@ -21,3 +21,9 @@ class Attachment(AbstractEntity):
     mimetype: str = Field(..., examples=["text/plain", "image/png"])
     size: int
     metadata: AttachmentMetadata | None = None
+
+
+class AttachmentShort(AbstractEntity):
+    url: str
+    id: int
+    display: str

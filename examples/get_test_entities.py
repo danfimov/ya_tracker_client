@@ -24,6 +24,8 @@ async def main() -> None:
     await client.get_user(uid=me.uid)
     await client.get_users()
     await client.get_issue('TRACKER-1')
+    await client.get_issue('TRACKER-1', expand='transitions')
+    await client.get_issue('TRACKER-1', expand='attachments')
     await client.get_issue_transitions('TRACKER-1')
     await client.get_queue('TRACKER')
     await client.get_issue_relationships('TRACKER-1')
@@ -37,6 +39,8 @@ async def main() -> None:
     await client.get_external_applications()
     await client.get_external_links("TRACKER-1")
     await client.get_macros('TRACKER')
+    await client.find_number_of_issues(issue_filter={'queue': 'TRACKER', "assignee": "empty()"})
+    await client.get_history_issue_changes('TRACKER-1')
 
     await client.stop()
 
