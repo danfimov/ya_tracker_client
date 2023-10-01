@@ -20,7 +20,6 @@ classifiers = [
     "Framework :: AsyncIO",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: Implementation :: CPython",
@@ -49,7 +48,7 @@ url = "https://pypi.yandex-team.ru/simple"
 priority = "supplemental"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 aiohttp = "^3.8.5"
 pydantic = ">= 1.10.12, < 3"
 certifi = "^2023.7.22"

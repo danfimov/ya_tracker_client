@@ -1756,5 +1756,5 @@ reference = "default-pypi"
 
 [metadata]
 lock-version = "2.0"
-python-versions = "^3.9"
-content-hash = "2b5b8934683aaacc992855e6c97c72718fac6c5beed2ceaf6efc8738d55584ef"
+python-versions = "^3.10"
+content-hash = "c1825b8878edb406dbdf1634642eed00b465daed1c4343fd8a68ecb572277dc1"
