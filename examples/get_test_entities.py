@@ -24,6 +24,7 @@ async def main() -> None:
     await client.get_user(uid=me.uid)
     await client.get_users()
     await client.get_issue('TRACKER-1')
+    await client.get_issue_transitions('TRACKER-1')
     await client.get_queue('TRACKER')
     await client.get_issue_relationships('TRACKER-1')
     await client.get_checklist_items("TRACKER-1")
