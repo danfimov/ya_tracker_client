@@ -1,7 +1,9 @@
 from datetime import datetime
+from typing import Any
 
 from pydantic import Field
 
+from ya_tracker_client.domain.entities.attachment import AttachmentShort
 from ya_tracker_client.domain.entities.base import AbstractEntity
 from ya_tracker_client.domain.entities.checklist import ChecklistItem
 from ya_tracker_client.domain.entities.issue_status import IssueStatus
@@ -10,6 +12,7 @@ from ya_tracker_client.domain.entities.priority import Priority
 from ya_tracker_client.domain.entities.queue import QueueIdentifier, QueueShort
 from ya_tracker_client.domain.entities.sprint import Sprint
 from ya_tracker_client.domain.entities.status import Status
+from ya_tracker_client.domain.entities.transition import TransitionShort
 from ya_tracker_client.domain.entities.user import UserShort
 
 
@@ -48,6 +51,9 @@ class Issue(AbstractEntity):
     status: Status
     previous_status: Status | None = None
     direction: str | None = None
+
+    transitions: list[TransitionShort] = Field(default_factory=list)
+    attachments: list[AttachmentShort] = Field(default_factory=list)
 
 
 class IssueCreate(AbstractEntity):
@@ -103,3 +109,10 @@ class IssueWithChecklist(AbstractEntity):
     deadline: datetime | None = None
 
     checklist_items: list[ChecklistItem] = Field(default_factory=list)
+
+
+class IssueFindParameters(AbstractEntity):
+    filter: dict[str, Any] | None = None
+    query: str | None = None
+    keys: str | None = None
+    queue: str | None = None
