@@ -28,6 +28,8 @@ async def main() -> None:
     await client.get_issue('TRACKER-1', expand='attachments')
     await client.get_issue_transitions('TRACKER-1')
     await client.get_queue('TRACKER')
+    await client.get_queue_fields('TRACKER')
+    await client.get_queue_versions('TRACKER')
     await client.get_issue_relationships('TRACKER-1')
     await client.get_checklist_items("TRACKER-1")
     await client.get_components()
@@ -41,6 +43,7 @@ async def main() -> None:
     await client.get_macros('TRACKER')
     await client.find_number_of_issues(issue_filter={'queue': 'TRACKER', "assignee": "empty()"})
     await client.get_history_issue_changes('TRACKER-1')
+    await client.find_issues()
 
     await client.stop()
 
