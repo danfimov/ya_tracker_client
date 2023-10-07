@@ -26,12 +26,19 @@ class BaseClient(ABC):
 
     def __init__(
         self,
-        organisation_id: str | int,
+        organisation_id: str | int | None = None,
         oauth_token: str | None = None,
         iam_token: str | None = None,
         api_host: str = "https://api.tracker.yandex.net",
         api_version: str = "v2",
     ) -> None:
+        """
+        :param organisation_id: ID from admin panel at Yandex Tracker. No needed for Yandex developers.
+        :param oauth_token: OAuth token from registered application at Yandex OAuth - https://oauth.yandex.ru/
+        :param iam_token: IAM token from registered application at Yandex OAuth - https://oauth.yandex.ru/
+        :param api_host: Host of your Tracker. For Yandex developers - https://st-api.yandex-team.ru
+        :param api_version: Version of API. Currently supported only v2 version.
+        """
         self._headers: dict[str, str] = {}
 
         # Yandex 360 uses integer identifiers and Yandex Cloud prefer strings in identifiers
