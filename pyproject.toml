@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ya_tracker_client"
-version = "0.0.2"
+version = "0.0.3"
 description = "Async Yandex Tracker Client"
 authors = [
     "Дмитрий Анфимов <work@danfimov.ru>",
