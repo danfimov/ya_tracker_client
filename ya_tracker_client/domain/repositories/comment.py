@@ -11,7 +11,7 @@ class CommentRepository(EntityRepository):
         attachment_ids: list[str] | None = None,
         summonees: list[str | UserShort] | None = None,
         maillist_summonees: list[str] | None = None,
-        is_add_to_followers: bool | None = None,
+        is_add_to_followers: bool = True,
     ) -> Comment:
         """
         Use this method to add a comment to an issue.
@@ -27,7 +27,7 @@ class CommentRepository(EntityRepository):
                 summonees=summonees,
                 maillist_summonees=maillist_summonees,
             ).model_dump(exclude_none=True, by_alias=True),
-            params={"is_add_to_followers": is_add_to_followers} if is_add_to_followers is not None else None,
+            params={"is_add_to_followers": str(is_add_to_followers).lower()}
         )
         return self._decode(raw_response, Comment)
 

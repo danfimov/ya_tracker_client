@@ -86,7 +86,7 @@ class IssueRepository(EntityRepository):
         raw_response = await self._client.request(
             method="GET",
             uri="/priorities/",
-            params={"localized": str(localized)},
+            params={"localized": str(localized).lower()},
         )
         return self._decode(raw_response, Priority)
 
@@ -147,10 +147,10 @@ class IssueRepository(EntityRepository):
             uri=f"/issues/{issue_id}/_move",
             params={
                 "queue": queue_id,
-                "notify": str(notify),
-                "notifyAuthor": str(notify_author),
-                "moveAllFields": str(move_all_fields),
-                "initialStatus": str(initial_status),
+                "notify": str(notify).lower(),
+                "notifyAuthor": str(notify_author).lower(),
+                "moveAllFields": str(move_all_fields).lower(),
+                "initialStatus": str(initial_status).lower(),
                 "expand": expand or "",
             },
             payload=IssueEdit(**kwargs).model_dump(exclude_unset=True),

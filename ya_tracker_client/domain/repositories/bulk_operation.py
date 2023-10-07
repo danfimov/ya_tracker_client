@@ -25,7 +25,7 @@ class BulkOperationRepository(EntityRepository):
                 move_all_fields=move_all_fields,
                 initial_status=initial_status,
             ).model_dump(exclude_none=True, by_alias=True),
-            params={"notify": "true" if notify else "false"},
+            params={"notify": str(notify).lower()},
         )
         return self._decode(raw_response, BulkOperation)
 
@@ -45,7 +45,7 @@ class BulkOperationRepository(EntityRepository):
                 issues=issue_ids,
                 values=values,
             ).model_dump(exclude_none=True, by_alias=True),
-            params={"notify": "true" if notify else "false"},
+            params={"notify": str(notify).lower()},
         )
         return self._decode(raw_response, BulkOperation)
 
@@ -67,6 +67,6 @@ class BulkOperationRepository(EntityRepository):
                 issues=issue_ids,
                 values=values,
             ).model_dump(exclude_none=True, by_alias=True),
-            params={"notify": "true" if notify else "false"},
+            params={"notify": str(notify).lower()},
         )
         return self._decode(raw_response, BulkOperation)

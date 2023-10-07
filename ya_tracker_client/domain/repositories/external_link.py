@@ -30,7 +30,7 @@ class ExternalLinkRepository(EntityRepository):
         key: str,
         origin: str,
         relationship: str = "RELATES",
-        backlink: bool | None = None,
+        backlink: bool = False,
     ) -> ExternalLink:
         """
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/add-external-link
@@ -43,7 +43,7 @@ class ExternalLinkRepository(EntityRepository):
                 "origin": origin,
                 "relationship": relationship,
             },
-            params={"backlink": backlink} if backlink is not None else None,
+            params={"backlink": str(backlink).lower()},
         )
         return self._decode(raw_response, ExternalLink)
 
