@@ -46,6 +46,8 @@ async def main() -> None:
         await client.find_number_of_issues(issue_filter={'queue': 'TRACKER', "assignee": "empty()"})
         await client.get_history_issue_changes('TRACKER-1')
         await client.find_issues()
+        await client.get_autoactions('TRACKER')
+        await client.get_triggers('TRACKER')
     except Exception as e:
         print('Test failed')
         print(e)

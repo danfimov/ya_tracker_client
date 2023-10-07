@@ -6,3 +6,7 @@ class IssueStatus(AbstractEntity):
     id: str
     key: str
     display: str
+
+
+class IssueStatusKey(AbstractEntity):
+    key: str

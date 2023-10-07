@@ -11,7 +11,6 @@ from ya_tracker_client.domain.entities.issue_type import IssueType
 from ya_tracker_client.domain.entities.priority import Priority
 from ya_tracker_client.domain.entities.queue import QueueIdentifier, QueueShort
 from ya_tracker_client.domain.entities.sprint import Sprint
-from ya_tracker_client.domain.entities.status import Status
 from ya_tracker_client.domain.entities.transition import TransitionShort
 from ya_tracker_client.domain.entities.user import UserShort
 
@@ -48,8 +47,8 @@ class Issue(AbstractEntity):
     created_by: UserShort
     votes: int
     updated_at: datetime | None = None
-    status: Status
-    previous_status: Status | None = None
+    status: IssueStatus
+    previous_status: IssueStatus | None = None
     direction: str | None = None
 
     transitions: list[TransitionShort] = Field(default_factory=list)
