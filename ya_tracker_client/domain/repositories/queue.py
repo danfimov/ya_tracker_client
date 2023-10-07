@@ -1,7 +1,11 @@
+from ya_tracker_client.domain.entities.action import Action
+from ya_tracker_client.domain.entities.calendar import Calendar
 from ya_tracker_client.domain.entities.issue_type_config import IssueTypeConfig
 from ya_tracker_client.domain.entities.queue import Queue, QueueCreate
+from ya_tracker_client.domain.entities.queue_autoaction import Autoaction, AutoactionCreate
 from ya_tracker_client.domain.entities.queue_field import QueueField
 from ya_tracker_client.domain.entities.queue_version import QueueVersion
+from ya_tracker_client.domain.entities.trigger import Trigger, TriggerCondition, TriggerCreate
 from ya_tracker_client.domain.repositories.base import EntityRepository
 
 
@@ -99,4 +103,116 @@ class QueueRepository(EntityRepository):
             method="DELETE",
             uri=f"/queues/{queue_id}/tags/_remove",
             payload={"tag": tag_name},
+        )
+
+    async def create_autoaction(
+        self,
+        queue_id: str | int,
+        name: str,
+        actions: list[Action],
+        issue_filter: list[dict] | dict | None = None,
+        query: str | None = None,
+        active: bool | None = None,
+        enable_notifications: bool | None = None,
+        interval_millis: int = 3_600_000,
+        calendar: Calendar | None = None,
+    ) -> Autoaction:
+        """
+        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/create-autoaction
+        """
+        raw_response = await self._client.request(
+            method="POST",
+            uri=f"/queues/{queue_id}/autoactions",
+            payload=AutoactionCreate(
+                name=name,
+                actions=actions,
+                filter=issue_filter,
+                query=query,
+                active=active,
+                enable_notifications=enable_notifications,
+                interval_millis=interval_millis,
+                calendar=calendar,
+            ).model_dump(exclude_none=True, by_alias=True),
+        )
+        return self._decode(raw_response, Autoaction)
+
+    async def get_autoaction(
+        self,
+        queue_id: str | int,
+        autoaction_id: str | int,
+    ) -> Autoaction:
+        """
+        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/get-autoaction
+        """
+        raw_response = await self._client.request(
+            method="GET",
+            uri=f"/queues/{queue_id}/autoactions/{autoaction_id}",
+        )
+        return self._decode(raw_response, Autoaction)
+
+    async def get_autoactions(
+        self,
+        queue_id: str | int,
+    ) -> list[Autoaction]:
+        # TODO: add info about this handler to YC docs
+        raw_response = await self._client.request(
+            method="GET",
+            uri=f"/queues/{queue_id}/autoactions/",
+        )
+        return self._decode(raw_response, Autoaction, plural=True)
+
+    async def delete_autoaction(
+        self,
+        queue_id: str | int,
+        autoaction_id: str | int,
+    ) -> None:
+        # TODO: add info about this handler to YC docs
+        await self._client.request(
+            method="DELETE",
+            uri=f"/queues/{queue_id}/autoactions/{autoaction_id}",
+        )
+
+    async def create_trigger(
+        self,
+        queue_id: str | int,
+        name: str,
+        actions: list[Action],
+        conditions: list[TriggerCondition] | None = None,
+        active: bool | None = None,
+    ) -> Trigger:
+        raw_response = await self._client.request(
+            method="POST",
+            uri=f"/queues/{queue_id}/triggers",
+            payload=TriggerCreate(
+                name=name,
+                actions=actions,
+                conditions=conditions,
+                active=active,
+            ).model_dump(exclude_none=True, by_alias=True),
+        )
+        return self._decode(raw_response, Trigger)
+
+    async def get_trigger(self, queue_id: str | int, trigger_id: str | int) -> Trigger:
+        """
+        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/get-trigger
+        """
+        raw_response = await self._client.request(
+            method="GET",
+            uri=f"/queues/{queue_id}/triggers/{trigger_id}",
+        )
+        return self._decode(raw_response, Trigger)
+
+    async def get_triggers(self, queue_id: str | int) -> list[Trigger]:
+        # TODO: add info about this handler to YC docs
+        raw_response = await self._client.request(
+            method="GET",
+            uri=f"/queues/{queue_id}/triggers/",
+        )
+        return self._decode(raw_response, Trigger, plural=True)
+
+    async def delete_trigger(self, queue_id: str | int, trigger_id: str | int) -> None:
+        # TODO: add info about this handler to YC docs
+        await self._client.request(
+            method="DELETE",
+            uri=f"/queues/{queue_id}/triggers/{trigger_id}",
         )

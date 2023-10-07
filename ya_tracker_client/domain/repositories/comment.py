@@ -27,7 +27,7 @@ class CommentRepository(EntityRepository):
                 summonees=summonees,
                 maillist_summonees=maillist_summonees,
             ).model_dump(exclude_none=True, by_alias=True),
-            params={"is_add_to_followers": str(is_add_to_followers).lower()}
+            params={"is_add_to_followers": str(is_add_to_followers).lower()},
         )
         return self._decode(raw_response, Comment)
 
