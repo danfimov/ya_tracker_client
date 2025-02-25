@@ -17,6 +17,7 @@ class TestGetIssue:
     @vcr.use_cassette(
         'tests/integration/vcr_cassettes/get_issue_ok.yaml',
         filter_headers=['Authorization', 'X-Cloud-Org-Id'],
+        match_on=['uri', 'method'],
     )
     async def test_get_issue__when_issue_found__then_return_it(self, client) -> None:
         # when
@@ -71,6 +72,7 @@ class TestGetIssue:
     @vcr.use_cassette(
         'tests/integration/vcr_cassettes/get_issue_not_found.yaml',
         filter_headers=['Authorization', 'X-Cloud-Org-Id'],
+        match_on=['uri', 'method'],
     )
     async def test_get_issue__when_issue_not_found__then_return_error(self, client) -> None:
         with pytest.raises(ClientObjectNotFoundError):

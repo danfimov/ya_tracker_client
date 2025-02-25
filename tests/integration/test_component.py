@@ -9,6 +9,7 @@ class TestGetComponents:
     @vcr.use_cassette(
         'tests/integration/vcr_cassettes/get_standard_components.yaml',
         filter_headers=['Authorization', 'X-Cloud-Org-Id'],
+        match_on=['uri', 'method'],
     )
     async def test_get_components__when_standard_components_exists__then_return_them(self, client) -> None:
         # when
@@ -46,6 +47,7 @@ class TestGetComponents:
     @vcr.use_cassette(
         'tests/integration/vcr_cassettes/get_custom_component.yaml',
         filter_headers=['Authorization', 'X-Cloud-Org-Id'],
+        match_on=['uri', 'method'],
     )
     async def test_get_components__when_custom_component_exists__then_return_it(self, client) -> None:
         # when
