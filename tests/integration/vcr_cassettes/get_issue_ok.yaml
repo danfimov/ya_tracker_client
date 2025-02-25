@@ -1,0 +1,32 @@
+interactions:
+- request:
+    body: 'null'
+    headers: {}
+    method: GET
+    uri: https://api.tracker.yandex.net/v2/issues/TEST-1?expand=
+  response:
+    body:
+      string: "{\"self\":\"https://api.tracker.yandex.net/v2/issues/TEST-1\",\"id\":\"678b278f6eaab8681c533f79\",\"key\":\"TEST-1\",\"version\":1,\"summary\":\"Test\",\"statusStartTime\":\"2025-01-18T04:01:19.738+0000\",\"updatedBy\":{\"self\":\"https://api.tracker.yandex.net/v2/users/8000000000000004\",\"id\":\"8000000000000004\",\"display\":\"Dmitry
+        Anfimov\",\"cloudUid\":\"ajeasjpl5sfocusdpv14\",\"passportUid\":747064831},\"statusType\":{\"id\":\"new\",\"display\":\"\u041D\u0430\u0447\u0430\u043B\u044C\u043D\u044B\u0439\",\"key\":\"new\"},\"type\":{\"self\":\"https://api.tracker.yandex.net/v2/issuetypes/2\",\"id\":\"2\",\"key\":\"task\",\"display\":\"\u0417\u0430\u0434\u0430\u0447\u0430\"},\"priority\":{\"self\":\"https://api.tracker.yandex.net/v2/priorities/3\",\"id\":\"3\",\"key\":\"normal\",\"display\":\"\u0421\u0440\u0435\u0434\u043D\u0438\u0439\"},\"createdAt\":\"2025-01-18T04:01:19.687+0000\",\"createdBy\":{\"self\":\"https://api.tracker.yandex.net/v2/users/8000000000000004\",\"id\":\"8000000000000004\",\"display\":\"Dmitry
+        Anfimov\",\"cloudUid\":\"ajeasjpl5sfocusdpv14\",\"passportUid\":747064831},\"commentWithoutExternalMessageCount\":0,\"votes\":0,\"commentWithExternalMessageCount\":0,\"queue\":{\"self\":\"https://api.tracker.yandex.net/v2/queues/TEST\",\"id\":\"2\",\"key\":\"TEST\",\"display\":\"Test\"},\"updatedAt\":\"2025-01-18T04:01:19.687+0000\",\"status\":{\"self\":\"https://api.tracker.yandex.net/v2/statuses/1\",\"id\":\"1\",\"key\":\"open\",\"display\":\"\u041E\u0442\u043A\u0440\u044B\u0442\"},\"favorite\":false}"
+    headers:
+      Content-Language:
+      - ru
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 25 Feb 2025 16:50:30 GMT
+      Etag:
+      - '"1"'
+      Last-Modified:
+      - Sat, 18 Jan 2025 04:01:19 +0000
+      Set-Cookie:
+      - uid=qcgAAGe99NYPmQDaBiaOAg==; path=/
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding, Accept-Language, Accept
+    status:
+      code: 200
+      message: OK
+version: 1

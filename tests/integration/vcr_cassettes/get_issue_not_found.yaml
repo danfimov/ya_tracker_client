@@ -1,0 +1,27 @@
+interactions:
+- request:
+    body: 'null'
+    headers: {}
+    method: GET
+    uri: https://api.tracker.yandex.net/v2/issues/TEST-100?expand=
+  response:
+    body:
+      string: "{\"errors\":{},\"errorsData\":{},\"errorMessages\":[\"\u0417\u0430\u0434\u0430\u0447\u0430
+        \u043D\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442.\"],\"statusCode\":404}"
+    headers:
+      Content-Language:
+      - ru
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 25 Feb 2025 17:13:26 GMT
+      Set-Cookie:
+      - uid=qcgAAGe9+jYPmQDaBjFrAg==; path=/
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding, Accept-Language, Accept
+    status:
+      code: 404
+      message: Not Found
+version: 1

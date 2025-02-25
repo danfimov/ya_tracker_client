@@ -1,6 +1,14 @@
+from datetime import datetime
 from typing import Any
 
-from ya_tracker_client.domain.entities.issue import Issue, IssueCreate, IssueEdit, IssueFindParameters, IssueShort
+from ya_tracker_client.domain.entities.issue import (
+    ImportIssue,
+    Issue,
+    IssueCreate,
+    IssueEdit,
+    IssueFindParameters,
+    IssueShort,
+)
 from ya_tracker_client.domain.entities.issue_change_history import IssueChangeHistory, IssueChangeHistoryParameters
 from ya_tracker_client.domain.entities.issue_type import IssueType
 from ya_tracker_client.domain.entities.priority import Priority
@@ -238,6 +246,9 @@ class IssueRepository(EntityRepository):
         keys: str | None = None,
         queue: str | None = None,
     ) -> list[Issue]:
+        """
+        YC docs: https://yandex.ru/support/tracker/ru/concepts/issues/search-issues
+        """
         params = {}
         if order:
             params['order'] = order
@@ -253,6 +264,86 @@ class IssueRepository(EntityRepository):
                 query=query,
                 keys=keys,
                 queue=queue,
+            ).model_dump(exclude_none=True, by_alias=True),
+        )
+        return self._decode(raw_response, Issue, plural=True)
+
+    async def import_issue(
+        self,
+        summary: str,
+        queue: QueueIdentifier | str | int,
+        created_at: datetime | str,
+        created_by: str | int,
+        key: str | None = None,
+        updated_at: datetime | str | None = None,
+        updated_by: str | int | None = None,
+        resolved_at: datetime | str | None = None,
+        resolved_by: str | int | None = None,
+        status: int | None = None,
+        deadline: datetime | str | None = None,
+        resolution: int | None = None,
+        type: int | None = None,
+        description: str | None = None,
+        start: datetime | str | None = None,
+        end: datetime | str | None = None,
+        assignee: str | int | None = None,
+        priority: int | None = None,
+        affected_versions: list[int] | None = None,
+        fix_versions: list[int] | None = None,
+        components: list[int] | None = None,
+        tags: list[str] | None = None,
+        sprint: list[int] | None = None,
+        followers: list[int | str] | None = None,
+        access: list[int | str] | None = None,
+        unique: str | None = None,
+        following_maillists: list[str] | None = None,
+        original_estimation: int | None = None,
+        estimation: int | None = None,
+        spent: int | None = None,
+        story_points: float | None = None,
+        voted_by: list[int | str] | None = None,
+        favorite_by: list[int | str] | None = None,
+    ):
+        """
+        YC docs: https://yandex.ru/support/tracker/ru/concepts/import/import-ticket
+        """
+        raw_response = await self._client.request(
+            method='POST',
+            uri='/issues/_search',
+            payload=ImportIssue(
+                summary=summary,
+                queue=queue,
+                created_at=created_at,
+                created_by=created_by,
+                key=key,
+                updated_at=updated_at,
+                updated_by=updated_by,
+                resolved_at=resolved_at,
+                resolved_by=resolved_by,
+                status=status,
+                deadline=deadline,
+                resolution=resolution,
+                type=type,
+                description=description,
+                start=start,
+                end=end,
+                assignee=assignee,
+                priority=priority,
+                affected_versions=affected_versions,
+                fix_versions=fix_versions,
+                components=components,
+                tags=tags,
+                sprint=sprint,
+                followers=followers,
+                access=access,
+                unique=unique,
+                following_maillists=following_maillists,
+                original_estimation=original_estimation,
+                estimation=estimation,
+                spent=spent,
+                story_points=story_points,
+                voted_by=voted_by,
+                favorite_by=favorite_by,
             ).model_dump(exclude_none=True, by_alias=True),
         )
         return self._decode(raw_response, Issue, plural=True)

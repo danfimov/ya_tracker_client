@@ -9,6 +9,6 @@ class Component(AbstractEntity):
     version: int
     name: str
     queue: QueueShort
-    description: str
+    description: str | None = None  # TODO: report to support - in docs its just string
     lead: UserShort | None = None
     assign_auto: bool
