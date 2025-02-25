@@ -1,0 +1,22 @@
+interactions:
+- request:
+    body: 'null'
+    headers: {}
+    method: GET
+    uri: https://api.tracker.yandex.net/v2/components
+  response:
+    body:
+      string: "[{\"self\":\"https://api.tracker.yandex.net/v2/components/1\",\"id\":1,\"version\":1,\"name\":\"\u0424\u0440\u043E\u043D\u0442\u0435\u043D\u0434\",\"queue\":{\"self\":\"https://api.tracker.yandex.net/v2/queues/DANFIMOV\",\"id\":\"1\",\"key\":\"DANFIMOV\",\"display\":\"\u041F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u044C\u043D\u0430\u044F
+        \u043E\u0447\u0435\u0440\u0435\u0434\u044C\"},\"assignAuto\":false},{\"self\":\"https://api.tracker.yandex.net/v2/components/2\",\"id\":2,\"version\":1,\"name\":\"\u0411\u0435\u043A\u0435\u043D\u0434\",\"queue\":{\"self\":\"https://api.tracker.yandex.net/v2/queues/DANFIMOV\",\"id\":\"1\",\"key\":\"DANFIMOV\",\"display\":\"\u041F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u044C\u043D\u0430\u044F
+        \u043E\u0447\u0435\u0440\u0435\u0434\u044C\"},\"assignAuto\":false},{\"self\":\"https://api.tracker.yandex.net/v2/components/4\",\"id\":4,\"version\":2,\"name\":\"Custom\",\"queue\":{\"self\":\"https://api.tracker.yandex.net/v2/queues/DANFIMOV\",\"id\":\"1\",\"key\":\"DANFIMOV\",\"display\":\"\u041F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u044C\u043D\u0430\u044F
+        \u043E\u0447\u0435\u0440\u0435\u0434\u044C\"},\"description\":\"\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435\",\"lead\":{\"self\":\"https://api.tracker.yandex.net/v2/users/8000000000000004\",\"id\":\"8000000000000004\",\"display\":\"Dmitry
+        Anfimov\",\"cloudUid\":\"ajeasjpl5sfocusdpv14\",\"passportUid\":747064831},\"assignAuto\":true}]"
+    headers:
+      X-Total-Count:
+      - '3'
+      X-Total-Pages:
+      - '1'
+    status:
+      code: 200
+      message: OK
+version: 1

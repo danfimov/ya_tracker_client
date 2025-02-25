@@ -45,10 +45,11 @@ dev = [
     "pytest-asyncio>=0.21.1",
     "pytest-cov>=4.1.0",
     "ruff>=0.9.7",
-    "polyfactory>=2.8.2",
+    "polyfactory>=2.19.0",
     "gevent>=23.9.1",
     "pre-commit>=3.4.0",
     "python-dotenv>=1.0.0",
+    "vcrpy>=7.0.0",
 ]
 
 [build-system]

@@ -1,0 +1,20 @@
+interactions:
+- request:
+    body: 'null'
+    headers: {}
+    method: GET
+    uri: https://api.tracker.yandex.net/v2/components
+  response:
+    body:
+      string: "[{\"self\":\"https://api.tracker.yandex.net/v2/components/1\",\"id\":1,\"version\":1,\"name\":\"\u0424\u0440\u043E\u043D\u0442\u0435\u043D\u0434\",\"queue\":{\"self\":\"https://api.tracker.yandex.net/v2/queues/DANFIMOV\",\"id\":\"1\",\"key\":\"DANFIMOV\",\"display\":\"\u041F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u044C\u043D\u0430\u044F
+        \u043E\u0447\u0435\u0440\u0435\u0434\u044C\"},\"assignAuto\":false},{\"self\":\"https://api.tracker.yandex.net/v2/components/2\",\"id\":2,\"version\":1,\"name\":\"\u0411\u0435\u043A\u0435\u043D\u0434\",\"queue\":{\"self\":\"https://api.tracker.yandex.net/v2/queues/DANFIMOV\",\"id\":\"1\",\"key\":\"DANFIMOV\",\"display\":\"\u041F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u044C\u043D\u0430\u044F
+        \u043E\u0447\u0435\u0440\u0435\u0434\u044C\"},\"assignAuto\":false}]"
+    headers:
+      X-Total-Count:
+      - '2'
+      X-Total-Pages:
+      - '1'
+    status:
+      code: 200
+      message: OK
+version: 1

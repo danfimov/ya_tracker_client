@@ -7,5 +7,5 @@ class Priority(AbstractEntity):
     key: str
     display: str | None = None
     version: int | None = None
-    name: str | dict | None = None
+    name: str | None = None
     order: int | None = None
