@@ -18,14 +18,14 @@ else:
         :return: The converted camelCase string.
         """
         camel = snake.title()
-        camel = sub("([0-9A-Za-z])_(?=[0-9A-Z])", lambda m: m.group(1), camel)  # to PascalCase first
-        return sub("(^_*[A-Z])", lambda m: m.group(1).lower(), camel)
+        camel = sub('([0-9A-Za-z])_(?=[0-9A-Z])', lambda m: m.group(1), camel)  # to PascalCase first
+        return sub('(^_*[A-Z])', lambda m: m.group(1).lower(), camel)
 
 
 def tracker_alias_generator(s: str) -> str:
     """Convert a string from snake case to camel case and rename url to self"""
-    if s == "url":
-        return "self"
+    if s == 'url':
+        return 'self'
     return to_camel(s)
 
 

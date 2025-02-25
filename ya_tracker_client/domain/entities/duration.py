@@ -7,14 +7,14 @@ from ya_tracker_client.domain.entities.base import AbstractEntity
 
 
 PATTERN = compile(
-    r"^P(?=[\dT])"
-    r"((?P<years>\d+)Y)?"
-    r"((?P<months>\d+)M)?"
-    r"((?P<weeks>\d+)W)?"
-    r"((?P<days>\d+)D)?"
-    r"(T((?P<hours>\d+)H)?"
-    r"((?P<minutes>\d+)M)?"
-    r"((?P<seconds>\d+)S)?)?$",
+    r'^P(?=[\dT])'
+    r'((?P<years>\d+)Y)?'
+    r'((?P<months>\d+)M)?'
+    r'((?P<weeks>\d+)W)?'
+    r'((?P<days>\d+)D)?'
+    r'(T((?P<hours>\d+)H)?'
+    r'((?P<minutes>\d+)M)?'
+    r'((?P<seconds>\d+)S)?)?$',
 )
 
 
@@ -26,7 +26,7 @@ class Duration(AbstractEntity):
     minutes: int = 0
     seconds: int = 0
 
-    @model_validator(mode="before")
+    @model_validator(mode='before')
     @classmethod
     def validate(cls, model_value: Any) -> dict | None:
         if not isinstance(model_value, str):
@@ -34,7 +34,7 @@ class Duration(AbstractEntity):
 
         result = PATTERN.match(model_value)
         if result is None:
-            msg = "Duration is not matched to ISO duration pattern."
+            msg = 'Duration is not matched to ISO duration pattern.'
             raise ValueError(msg)
 
         data: dict[str, int] = {}
@@ -44,23 +44,23 @@ class Duration(AbstractEntity):
         return data
 
     def __str__(self) -> str:
-        time = ""
+        time = ''
         if self.hours:
-            time = f"{time}{self.hours}H"
+            time = f'{time}{self.hours}H'
         if self.minutes:
-            time = f"{time}{self.minutes}M"
+            time = f'{time}{self.minutes}M'
         if self.seconds:
-            time = f"{time}{self.seconds}S"
+            time = f'{time}{self.seconds}S'
 
-        duration = "P"
+        duration = 'P'
         if self.years:
-            duration = f"{duration}{self.years}Y"
+            duration = f'{duration}{self.years}Y'
         if self.months:
-            duration = f"{duration}{self.months}M"
+            duration = f'{duration}{self.months}M'
         if self.days:
-            duration = f"{duration}{self.days}D"
+            duration = f'{duration}{self.days}D'
         if time:
-            duration = f"{duration}T{time}"
+            duration = f'{duration}T{time}'
 
         return duration
 

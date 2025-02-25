@@ -8,7 +8,7 @@ class ComponentRepository(EntityRepository):
         YT docs: https://cloud.yandex.com/en/docs/tracker/get-components
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri="/components",
+            method='GET',
+            uri='/components',
         )
         return self._decode(raw_response, Component, plural=True)

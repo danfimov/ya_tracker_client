@@ -12,7 +12,7 @@ class ProjectCreate(AbstractEntity):
     queues: str
     description: str | None = None
     lead: str | int | None = None
-    status: str | None = Field(default=None, examples=["DRAFT", "IN_PROGRESS", "LAUNCHED", "POSTPONED"])
+    status: str | None = Field(default=None, examples=['DRAFT', 'IN_PROGRESS', 'LAUNCHED', 'POSTPONED'])
     start_date: date | None = None
     end_date: date | None = None
 
@@ -25,7 +25,7 @@ class Project(AbstractEntity):
     name: str
     description: str | None = None
     lead: UserShort
-    status: str = Field(default=None, examples=["DRAFT", "IN_PROGRESS", "LAUNCHED", "POSTPONED"])
+    status: str = Field(default=None, examples=['DRAFT', 'IN_PROGRESS', 'LAUNCHED', 'POSTPONED'])
     start_date: date | None = None
     end_date: date | None = None
 
@@ -39,6 +39,6 @@ class ProjectEdit(AbstractEntity):
     queues: str
     description: str | None = None
     lead: str | int | None = None
-    status: str | None = Field(default=None, examples=["DRAFT", "IN_PROGRESS", "LAUNCHED", "POSTPONED"])
+    status: str | None = Field(default=None, examples=['DRAFT', 'IN_PROGRESS', 'LAUNCHED', 'POSTPONED'])
     start_date: date | None = None
     end_date: date | None = None

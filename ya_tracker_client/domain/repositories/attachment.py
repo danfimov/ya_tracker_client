@@ -14,8 +14,8 @@ class AttachmentRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-attachments-list
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri=f"/issues/{issue_id}/attachments",
+            method='GET',
+            uri=f'/issues/{issue_id}/attachments',
         )
         return self._decode(raw_response, Attachment, plural=True)
 
@@ -31,8 +31,8 @@ class AttachmentRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-attachment
         """
         return await self._client.request(
-            method="GET",
-            uri=f"/issues/{issue_id}/attachments/{attachment_id}/{filename}",
+            method='GET',
+            uri=f'/issues/{issue_id}/attachments/{attachment_id}/{filename}',
         )
 
     async def download_thumbnail(
@@ -46,8 +46,8 @@ class AttachmentRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-attachment-preview
         """
         return await self._client.request(
-            method="GET",
-            uri=f"/issues/{issue_id}/thumbnails/{attachment_id}",
+            method='GET',
+            uri=f'/issues/{issue_id}/thumbnails/{attachment_id}',
         )
 
     async def attach_file(
@@ -61,11 +61,11 @@ class AttachmentRepository(EntityRepository):
 
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/post-attachment
         """
-        form = FormData(fields={"file_data": file})
+        form = FormData(fields={'file_data': file})
         raw_response = await self._client.request(
-            method="POST",
-            uri=f"/issues/{issue_id}/attachments",
-            params={"filename": filename} if filename else None,
+            method='POST',
+            uri=f'/issues/{issue_id}/attachments',
+            params={'filename': filename} if filename else None,
             form=form,
         )
         return self._decode(raw_response, Attachment)
@@ -84,11 +84,11 @@ class AttachmentRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/temp-attachment
         """
         form = FormData()
-        form.add_field("file_data", file)
+        form.add_field('file_data', file)
         raw_response = await self._client.request(
-            method="POST",
-            uri="/attachments/",
-            params={"filename": filename} if filename else None,
+            method='POST',
+            uri='/attachments/',
+            params={'filename': filename} if filename else None,
             form=form,
         )
         return self._decode(raw_response, Attachment)
@@ -100,6 +100,6 @@ class AttachmentRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/delete-attachment
         """
         await self._client.request(
-            method="DELETE",
-            uri=f"/issues/{issue_id}/attachments/{attachment_id}/",
+            method='DELETE',
+            uri=f'/issues/{issue_id}/attachments/{attachment_id}/',
         )

@@ -19,8 +19,8 @@ class Comment(AbstractEntity):
     summonees: list[UserShort] = Field(default_factory=list)
     maillistsummonees: list[MailingList] = Field(default_factory=list)
     version: int
-    type: str = Field(examples=["standard", "incoming", "outcoming"])
-    transport: str = Field(examples=["internal", "email"])
+    type: str = Field(examples=['standard', 'incoming', 'outcoming'])
+    transport: str = Field(examples=['internal', 'email'])
 
 
 class CommentCreate(AbstractEntity):

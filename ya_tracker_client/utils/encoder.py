@@ -11,7 +11,7 @@ class UpgradedJSONEncoder(JSONEncoder):
     def default(self, entity):
         if isinstance(entity, datetime):
             if entity.tzinfo is None:  # for YYYY-MM-DDThh:mm:ss.sss±hhmm format
-                entity = entity.replace(tzinfo=ZoneInfo("UTC"))
+                entity = entity.replace(tzinfo=ZoneInfo('UTC'))
             return entity.isoformat()
 
         if isinstance(entity, Decimal) or isinstance(entity, UUID):
@@ -28,5 +28,5 @@ def serialize_entity(entity):
 
 
 __all__ = [
-    "serialize_entity",
+    'serialize_entity',
 ]

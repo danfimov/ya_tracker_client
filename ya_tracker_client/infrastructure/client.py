@@ -17,8 +17,8 @@ class AiohttpClient(BaseClient):
         organisation_id: str | int | None = None,
         oauth_token: str | None = None,
         iam_token: str | None = None,
-        api_host: str = "https://api.tracker.yandex.net",
-        api_version: str = "v2",
+        api_host: str = 'https://api.tracker.yandex.net',
+        api_version: str = 'v2',
         timeout: float = 0.,
     ) -> None:
         super().__init__(

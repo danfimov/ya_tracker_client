@@ -1,19 +1,19 @@
 import os
 from asyncio import run
+from pprint import pprint
 
 from dotenv import load_dotenv
 
 from ya_tracker_client import YaTrackerClient
-from pprint import pprint
 
 
 load_dotenv()
 # from registered application at Yandex OAuth - https://oauth.yandex.ru/
-API_TOKEN = os.getenv("API_TOKEN", default=None)
+API_TOKEN = os.getenv('API_TOKEN', default=None)
 # from admin panel at Yandex Tracker - https://tracker.yandex.ru/admin/orgs
-API_ORGANISATION_ID = os.getenv("API_ORGANISATION_ID")
+API_ORGANISATION_ID = os.getenv('API_ORGANISATION_ID')
 
-API_HOST = os.getenv("API_HOST", default="https://api.tracker.yandex.net")
+API_HOST = os.getenv('API_HOST', default='https://api.tracker.yandex.net')
 
 
 async def main() -> None:
@@ -29,5 +29,5 @@ async def main() -> None:
     await client.stop()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     run(main())

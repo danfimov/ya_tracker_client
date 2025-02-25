@@ -18,7 +18,7 @@ class Attachment(AbstractEntity):
     thumbnail: str | None = None
     created_by: UserShort
     created_at: datetime
-    mimetype: str = Field(..., examples=["text/plain", "image/png"])
+    mimetype: str = Field(..., examples=['text/plain', 'image/png'])
     size: int
     metadata: AttachmentMetadata | None = None
 
