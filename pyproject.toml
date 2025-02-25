@@ -44,7 +44,7 @@ dev = [
     "coverage>=7.3.1",
     "pytest-asyncio>=0.21.1",
     "pytest-cov>=4.1.0",
-    "ruff>=0.0.287",
+    "ruff>=0.9.7",
     "polyfactory>=2.8.2",
     "gevent>=23.9.1",
     "pre-commit>=3.4.0",
@@ -92,18 +92,21 @@ addopts = ["-p no:pastebin", "-p no:nose", "-p no:doctest"]
 
 [tool.ruff]
 line-length = 120
-select = ["W", "E", "F", "Q", "B", "I", "N", "ASYNC", "G", "RUF", "COM", "C90"]
-ignore = []
 target-version = "py311"
 
-[tool.ruff.flake8-quotes]
-docstring-quotes = "double"
-quote-style = "single"
+[tool.ruff.lint]
+select = ["W", "E", "F", "Q", "B", "I", "N", "ASYNC", "G", "RUF", "COM", "C90"]
+ignore = []
 
-[tool.ruff.mccabe]
+[tool.ruff.lint.flake8-quotes]
+docstring-quotes = "double"
+inline-quotes = "single"
+multiline-quotes = "single"
+
+[tool.ruff.lint.mccabe]
 # Unlike Flake8, default to a complexity level of 10.
 max-complexity = 10
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 known-local-folder = ["ya_tacker_client"]
 lines-after-imports = 2
