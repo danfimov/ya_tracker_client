@@ -9,7 +9,7 @@ HELP_FUN = \
     @{$$help{$$_}},"\n" for keys %help; \
 
 CODE = ya_tracker_client
-TEST = poetry run python3 -m pytest --verbosity=2 --showlocals --log-level=DEBUG
+TEST = uv run python3 -m pytest --verbosity=2 --showlocals --log-level=DEBUG
 
 ifndef args
 MESSAGE = "No such command (or you pass two or many targets to ). List of possible commands: make help"
