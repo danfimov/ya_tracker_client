@@ -9,8 +9,8 @@ class MacroRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/get-macroses
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri=f"/queues/{queue_id}/macros",
+            method='GET',
+            uri=f'/queues/{queue_id}/macros',
         )
         return self._decode(raw_response, Macro, plural=True)
 
@@ -19,8 +19,8 @@ class MacroRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/get-macros
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri=f"/queues/{queue_id}/macros/{macro_id}",
+            method='GET',
+            uri=f'/queues/{queue_id}/macros/{macro_id}',
         )
         return self._decode(raw_response, Macro)
 
@@ -35,8 +35,8 @@ class MacroRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/post-macros
         """
         raw_response = await self._client.request(
-            method="POST",
-            uri=f"/queues/{queue_id}/macros",
+            method='POST',
+            uri=f'/queues/{queue_id}/macros',
             payload=MacroCreate(
                 name=name,
                 body=body,
@@ -57,8 +57,8 @@ class MacroRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/patch-macros
         """
         raw_response = await self._client.request(
-            method="PATCH",
-            uri=f"/queues/{queue_id}/macros/{macro_id}",
+            method='PATCH',
+            uri=f'/queues/{queue_id}/macros/{macro_id}',
             payload=MacroEdit(
                 name=name,
                 body=body,
@@ -72,6 +72,6 @@ class MacroRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/delete-macros
         """
         await self._client.request(
-            method="DELETE",
-            uri=f"/queues/{queue_id}/macros/{macro_id}",
+            method='DELETE',
+            uri=f'/queues/{queue_id}/macros/{macro_id}',
         )

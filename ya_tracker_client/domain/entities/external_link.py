@@ -12,7 +12,7 @@ class ExternalLink(AbstractEntity):
     url: str
     id: int
     type: IssueRelationshipType
-    direction: str = Field(examples=["outward", "inward"])
+    direction: str = Field(examples=['outward', 'inward'])
     object: ExternalObject
     created_by: UserShort
     updated_by: UserShort

@@ -29,8 +29,8 @@ class BaseClient(ABC):
         organisation_id: str | int | None = None,
         oauth_token: str | None = None,
         iam_token: str | None = None,
-        api_host: str = "https://api.tracker.yandex.net",
-        api_version: str = "v2",
+        api_host: str = 'https://api.tracker.yandex.net',
+        api_version: str = 'v2',
     ) -> None:
         """
         :param organisation_id: ID from admin panel at Yandex Tracker. No needed for Yandex developers.
@@ -43,14 +43,14 @@ class BaseClient(ABC):
 
         # Yandex 360 uses integer identifiers and Yandex Cloud prefer strings in identifiers
         if isinstance(organisation_id, int) or organisation_id.isdigit():
-            self._headers["X-Org-Id"] = str(organisation_id)
+            self._headers['X-Org-Id'] = str(organisation_id)
         else:
-            self._headers["X-Cloud-Org-Id"] = organisation_id
+            self._headers['X-Cloud-Org-Id'] = organisation_id
 
         if oauth_token is not None:
-            self._headers["Authorization"] = f"OAuth {oauth_token}"
+            self._headers['Authorization'] = f'OAuth {oauth_token}'
         elif iam_token is not None:
-            self._headers["Authorization"] = f"Bearer {iam_token}"
+            self._headers['Authorization'] = f'Bearer {iam_token}'
         else:
             raise ClientInitTokenError
 
@@ -69,13 +69,13 @@ class BaseClient(ABC):
             bytes_payload = form
         else:
             bytes_payload = BytesPayload(
-                value=bytes(serialize_entity(payload), encoding="utf-8"),
-                content_type="application/json",
+                value=bytes(serialize_entity(payload), encoding='utf-8'),
+                content_type='application/json',
             )
 
         status, body = await self._make_request(
             method=method,
-            url=f"{self._base_url}/{self._api_version}{uri}",
+            url=f'{self._base_url}/{self._api_version}{uri}',
             params=params,
             data=bytes_payload,
         )
@@ -101,7 +101,7 @@ class BaseClient(ABC):
         if status <= HTTPStatus.IM_USED:
             return
 
-        logger.exception("Response error. Status: %s. Body: %s", status, body)
+        logger.exception('Response error. Status: %s. Body: %s', status, body)
 
         match status:
             case HTTPStatus.UNAUTHORIZED:

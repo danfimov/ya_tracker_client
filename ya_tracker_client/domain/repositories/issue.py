@@ -12,14 +12,14 @@ from ya_tracker_client.domain.repositories.base import EntityRepository
 
 
 class IssueRepository(EntityRepository):
-    async def get_issue(self, issue_id: str, expand: str = "") -> Issue:
+    async def get_issue(self, issue_id: str, expand: str = '') -> Issue:
         """
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-issue
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri=f"/issues/{issue_id}",
-            params={"expand": expand},
+            method='GET',
+            uri=f'/issues/{issue_id}',
+            params={'expand': expand},
         )
         return self._decode(raw_response, Issue)
 
@@ -41,8 +41,8 @@ class IssueRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/create-issue#queue
         """
         raw_response = await self._client.request(
-            method="POST",
-            uri="/issues/",
+            method='POST',
+            uri='/issues/',
             payload=IssueCreate(
                 summary=summary,
                 queue=queue,
@@ -69,9 +69,9 @@ class IssueRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/patch-issue
         """
         raw_response = await self._client.request(
-            method="PATCH",
-            uri=f"/issues/{issue_id}",
-            params={"version": version} if version is not None else None,
+            method='PATCH',
+            uri=f'/issues/{issue_id}',
+            params={'version': version} if version is not None else None,
             payload=IssueEdit(**kwargs).model_dump(exclude_unset=True),
         )
         return self._decode(raw_response, Issue)
@@ -84,9 +84,9 @@ class IssueRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-priorities
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri="/priorities/",
-            params={"localized": str(localized).lower()},
+            method='GET',
+            uri='/priorities/',
+            params={'localized': str(localized).lower()},
         )
         return self._decode(raw_response, Priority)
 
@@ -98,8 +98,8 @@ class IssueRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-transitions
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri=f"/issues/{issue_id}/transitions/",
+            method='GET',
+            uri=f'/issues/{issue_id}/transitions/',
         )
         return self._decode(raw_response, Transition, plural=True)
 
@@ -143,15 +143,15 @@ class IssueRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/move-issue
         """
         raw_response = await self._client.request(
-            method="POST",
-            uri=f"/issues/{issue_id}/_move",
+            method='POST',
+            uri=f'/issues/{issue_id}/_move',
             params={
-                "queue": queue_id,
-                "notify": str(notify).lower(),
-                "notifyAuthor": str(notify_author).lower(),
-                "moveAllFields": str(move_all_fields).lower(),
-                "initialStatus": str(initial_status).lower(),
-                "expand": expand or "",
+                'queue': queue_id,
+                'notify': str(notify).lower(),
+                'notifyAuthor': str(notify_author).lower(),
+                'moveAllFields': str(move_all_fields).lower(),
+                'initialStatus': str(initial_status).lower(),
+                'expand': expand or '',
             },
             payload=IssueEdit(**kwargs).model_dump(exclude_unset=True),
         )
@@ -164,11 +164,11 @@ class IssueRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/count-issues
         """
         raw_response = await self._client.request(
-            method="POST",
-            uri="/issues/_count",
+            method='POST',
+            uri='/issues/_count',
             payload={
-                "filter": issue_filter,
-                "query": query,
+                'filter': issue_filter,
+                'query': query,
             },
         )
         return int(raw_response)
@@ -182,8 +182,8 @@ class IssueRepository(EntityRepository):
         :return: None
         """  # noqa: E501
         await self._client.request(
-            method="POST",
-            uri="/system/search/scroll/_clear",
+            method='POST',
+            uri='/system/search/scroll/_clear',
             payload={scroll_id: scroll_token},
         )
 
@@ -197,11 +197,11 @@ class IssueRepository(EntityRepository):
         """
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/new-transition
         """
-        payload = {"comment": comment}
+        payload = {'comment': comment}
         payload.update(kwargs)
         raw_response = await self._client.request(
-            method="POST",
-            uri=f"/issues/{issue_id}/transitions/{transition_id}/_execute",
+            method='POST',
+            uri=f'/issues/{issue_id}/transitions/{transition_id}/_execute',
             payload=payload,
         )
         return self._decode(raw_response, Transition, plural=True)
@@ -218,8 +218,8 @@ class IssueRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-changelog
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri=f"/issues/{issue_id}/changelog",
+            method='GET',
+            uri=f'/issues/{issue_id}/changelog',
             payload=IssueChangeHistoryParameters(
                 id=change_id,
                 per_page=per_page,
@@ -240,13 +240,13 @@ class IssueRepository(EntityRepository):
     ) -> list[Issue]:
         params = {}
         if order:
-            params["order"] = order
+            params['order'] = order
         if expand:
-            params["expand"] = expand
+            params['expand'] = expand
 
         raw_response = await self._client.request(
-            method="POST",
-            uri="/issues/_search",
+            method='POST',
+            uri='/issues/_search',
             params=params,
             payload=IssueFindParameters(
                 filter=issue_filter,

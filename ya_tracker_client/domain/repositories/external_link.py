@@ -9,8 +9,8 @@ class ExternalLinkRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-applications
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri="/applications",
+            method='GET',
+            uri='/applications',
         )
         return self._decode(raw_response, ExternalApplication, plural=True)
 
@@ -19,8 +19,8 @@ class ExternalLinkRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-external-links
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri=f"/issues/{issue_id}/remotelinks",
+            method='GET',
+            uri=f'/issues/{issue_id}/remotelinks',
         )
         return self._decode(raw_response, ExternalLink, plural=True)
 
@@ -29,21 +29,21 @@ class ExternalLinkRepository(EntityRepository):
         issue_id: str,
         key: str,
         origin: str,
-        relationship: str = "RELATES",
+        relationship: str = 'RELATES',
         backlink: bool = False,
     ) -> ExternalLink:
         """
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/add-external-link
         """
         raw_response = await self._client.request(
-            method="POST",
-            uri=f"/issues/{issue_id}/remotelinks",
+            method='POST',
+            uri=f'/issues/{issue_id}/remotelinks',
             payload={
-                "key": key,
-                "origin": origin,
-                "relationship": relationship,
+                'key': key,
+                'origin': origin,
+                'relationship': relationship,
             },
-            params={"backlink": str(backlink).lower()},
+            params={'backlink': str(backlink).lower()},
         )
         return self._decode(raw_response, ExternalLink)
 
@@ -52,6 +52,6 @@ class ExternalLinkRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/delete-external-link
         """
         await self._client.request(
-            method="DELETE",
-            uri=f"/issues/{issue_id}/remotelinks/{external_link_id}",
+            method='DELETE',
+            uri=f'/issues/{issue_id}/remotelinks/{external_link_id}',
         )

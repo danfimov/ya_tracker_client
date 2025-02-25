@@ -50,6 +50,7 @@ class Issue(AbstractEntity):
     status: IssueStatus
     previous_status: IssueStatus | None = None
     direction: str | None = None
+    tags: list[str] = Field(default_factory=list)
 
     transitions: list[TransitionShort] = Field(default_factory=list)
     attachments: list[AttachmentShort] = Field(default_factory=list)
@@ -77,6 +78,7 @@ class IssueEdit(AbstractEntity):
     type: IssueType | None = None
     priority: Priority | None = None
     followers: list[UserShort | str] | None = None
+    tags: list[str] | None = None
 
 
 class IssueWithChecklist(AbstractEntity):

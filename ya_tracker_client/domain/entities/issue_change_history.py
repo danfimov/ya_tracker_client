@@ -17,8 +17,8 @@ class FieldChangeHistoryState(AbstractEntity):
 
 class FieldChangeHistory(AbstractEntity):
     field: IssueFieldShort
-    change_from: FieldChangeHistoryState | str | list | None = Field(default=None, alias="from")
-    change_to: FieldChangeHistoryState | str | list | None = Field(default=None, alias="to")
+    change_from: FieldChangeHistoryState | str | list | None = Field(default=None, alias='from')
+    change_to: FieldChangeHistoryState | str | list | None = Field(default=None, alias='to')
 
 
 class IssueChangeHistory(AbstractEntity):

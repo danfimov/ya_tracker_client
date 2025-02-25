@@ -19,15 +19,15 @@ class CommentRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/add-comment
         """
         raw_response = await self._client.request(
-            method="POST",
-            uri=f"/issues/{issue_id}/comments",
+            method='POST',
+            uri=f'/issues/{issue_id}/comments',
             payload=CommentCreate(
                 text=text,
                 attachment_ids=attachment_ids,
                 summonees=summonees,
                 maillist_summonees=maillist_summonees,
             ).model_dump(exclude_none=True, by_alias=True),
-            params={"is_add_to_followers": str(is_add_to_followers).lower()},
+            params={'is_add_to_followers': str(is_add_to_followers).lower()},
         )
         return self._decode(raw_response, Comment)
 
@@ -38,8 +38,8 @@ class CommentRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-comments
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri=f"/issues/{issue_id}/comments",
+            method='GET',
+            uri=f'/issues/{issue_id}/comments',
         )
         return self._decode(raw_response, Comment, plural=True)
 
@@ -56,8 +56,8 @@ class CommentRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/edit-comment
         """
         raw_response = await self._client.request(
-            method="PATCH",
-            uri=f"/issues/{issue_id}/comments/{comment_id}",
+            method='PATCH',
+            uri=f'/issues/{issue_id}/comments/{comment_id}',
             payload=CommentEdit(
                 text=text,
                 attachment_ids=attachment_ids,
@@ -76,6 +76,6 @@ class CommentRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/delete-comment
         """
         await self._client.request(
-            method="DELETE",
-            uri=f"/issues/{issue_id}/comments/{comment_id}",
+            method='DELETE',
+            uri=f'/issues/{issue_id}/comments/{comment_id}',
         )

@@ -36,8 +36,8 @@ class AutoactionCreate(AbstractEntity):
     interval_millis: int = 3_600_000
     calendar: Calendar | None = None
 
-    @model_validator(mode="after")
-    def filter_or_query_is_exists(self) -> "AutoactionCreate":
+    @model_validator(mode='after')
+    def filter_or_query_is_exists(self) -> 'AutoactionCreate':
         if self.filter is None and self.query is None:
-            raise ValueError("Filter or query must be not None")
+            raise ValueError('Filter or query must be not None')
         return self

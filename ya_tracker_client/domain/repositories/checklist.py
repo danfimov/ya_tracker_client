@@ -19,8 +19,8 @@ class ChecklistRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/add-checklist-item
         """
         raw_response = await self._client.request(
-            method="POST",
-            uri=f"/issues/{issue_id}/checklistItems",
+            method='POST',
+            uri=f'/issues/{issue_id}/checklistItems',
             payload=ChecklistCreate(
                 text=text,
                 checked=checked,
@@ -37,8 +37,8 @@ class ChecklistRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-checklist
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri=f"/issues/{issue_id}/checklistItems",
+            method='GET',
+            uri=f'/issues/{issue_id}/checklistItems',
         )
         return self._decode(raw_response, ChecklistItem, plural=True)
 
@@ -55,8 +55,8 @@ class ChecklistRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/edit-checklist
         """
         raw_response = await self._client.request(
-            method="PATCH",
-            uri=f"/issues/{issue_id}/checklistItems/{checklist_item_id}",
+            method='PATCH',
+            uri=f'/issues/{issue_id}/checklistItems/{checklist_item_id}',
             payload=ChecklistItemEdit(
                 text=text,
                 checked=checked,
@@ -71,8 +71,8 @@ class ChecklistRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/delete-checklist
         """
         raw_response = await self._client.request(
-            method="DELETE",
-            uri=f"/issues/{issue_id}/checklistItems",
+            method='DELETE',
+            uri=f'/issues/{issue_id}/checklistItems',
         )
         return self._decode(raw_response, IssueWithChecklist)
 
@@ -81,7 +81,7 @@ class ChecklistRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/delete-checklist-item
         """
         raw_response = await self._client.request(
-            method="DELETE",
-            uri=f"/issues/{issue_id}/checklistItems/{checklist_item_id}",
+            method='DELETE',
+            uri=f'/issues/{issue_id}/checklistItems/{checklist_item_id}',
         )
         return self._decode(raw_response, IssueWithChecklist)

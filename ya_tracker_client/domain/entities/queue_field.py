@@ -13,7 +13,7 @@ class QueueField(AbstractEntity):
     id: str
     name: str
     version: int
-    field_schema: QueueFieldSchema = Field(alias="schema")
+    field_schema: QueueFieldSchema = Field(alias='schema')
     readonly: bool
     options: bool
     suggest: bool

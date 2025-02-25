@@ -17,8 +17,8 @@ class WorklogRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/new-worklog
         """
         raw_response = await self._client.request(
-            method="POST",
-            uri=f"/issues/{issue_id}/worklog",
+            method='POST',
+            uri=f'/issues/{issue_id}/worklog',
             payload=WorklogCreate(
                 start=start,
                 duration=duration,
@@ -38,8 +38,8 @@ class WorklogRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/patch-worklog
         """
         raw_response = await self._client.request(
-            method="PATCH",
-            uri=f"/issues/{issue_id}/worklog/{worklog_id}",
+            method='PATCH',
+            uri=f'/issues/{issue_id}/worklog/{worklog_id}',
             payload=WorklogEdit(
                 duration=duration,
                 comment=comment,
@@ -56,8 +56,8 @@ class WorklogRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/delete-worklog
         """
         await self._client.request(
-            method="DELETE",
-            uri=f"/issues/{issue_id}/worklog/{worklog_id}",
+            method='DELETE',
+            uri=f'/issues/{issue_id}/worklog/{worklog_id}',
         )
 
     async def get_worklog(self, issue_id: str) -> list[Worklog]:
@@ -65,8 +65,8 @@ class WorklogRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/issue-worklog
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri=f"/issues/{issue_id}/worklog",
+            method='GET',
+            uri=f'/issues/{issue_id}/worklog',
         )
         return self._decode(raw_response, Worklog, plural=True)
 
@@ -81,17 +81,17 @@ class WorklogRepository(EntityRepository):
         """
         payload = {}
         if created_by is not None:
-            payload["createdBy"] = created_by
+            payload['createdBy'] = created_by
         if created_at_from is not None:
-            payload["createdAt"] = {"from": created_at_from}
+            payload['createdAt'] = {'from': created_at_from}
         if created_at_to is not None:
-            if payload.get("createdAt") is None:
-                payload["createdAt"]["to"] = created_at_to
+            if payload.get('createdAt') is None:
+                payload['createdAt']['to'] = created_at_to
             else:
-                payload["createdAt"] = {"to": created_at_to}
+                payload['createdAt'] = {'to': created_at_to}
         raw_response = await self._client.request(
-            method="POST",
-            uri="/worklog/_search",
+            method='POST',
+            uri='/worklog/_search',
             payload=payload,
         )
         return self._decode(raw_response, Worklog, plural=True)

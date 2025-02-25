@@ -21,7 +21,7 @@ class Worklog(AbstractEntity):
     start: datetime
     duration: Duration
 
-    @field_serializer("duration")
+    @field_serializer('duration')
     def serialize_duration(self, duration: Duration):
         return str(duration)
 
@@ -31,7 +31,7 @@ class WorklogCreate(AbstractEntity):
     duration: Duration
     comment: str | None = None
 
-    @field_serializer("duration")
+    @field_serializer('duration')
     def serialize_duration(self, duration: Duration):
         return str(duration)
 
@@ -40,6 +40,6 @@ class WorklogEdit(AbstractEntity):
     duration: Duration | None = None
     comment: str | None = None
 
-    @field_serializer("duration")
+    @field_serializer('duration')
     def serialize_duration(self, duration: Duration):
         return str(duration)

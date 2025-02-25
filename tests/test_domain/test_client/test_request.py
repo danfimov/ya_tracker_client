@@ -32,7 +32,7 @@ class ClientForTestRequestStatus(BaseClient):
         params: dict[str, Any] | None = None,
         data: bytes | None = None,
     ) -> tuple[int, bytes]:
-        return self.make_request_status_code, b"Test response body"
+        return self.make_request_status_code, b'Test response body'
 
     async def stop(self) -> None:
         pass
@@ -41,7 +41,7 @@ class ClientForTestRequestStatus(BaseClient):
 def create_client_for_test_request_status(status_code: int) -> ClientForTestRequestStatus:
     client = ClientForTestRequestStatus(
         organisation_id=randint(1, 1000),
-        oauth_token="test_token",
+        oauth_token='test_token',
     )
     client.make_request_status_code = status_code
     return client
@@ -53,7 +53,7 @@ class TestCheckStatus:
     """
 
     @pytest.mark.parametrize(
-        "status_code",
+        'status_code',
         (
             HTTPStatus.OK,
             HTTPStatus.CREATED,
@@ -62,11 +62,11 @@ class TestCheckStatus:
     )
     async def test_request__when_status_ok__then_not_raise_error(self, status_code: int) -> None:
         client = create_client_for_test_request_status(status_code)
-        response_body = await client.request("GET", "/test_uri")
-        assert response_body == b"Test response body"
+        response_body = await client.request('GET', '/test_uri')
+        assert response_body == b'Test response body'
 
     @pytest.mark.parametrize(
-        "status_code, error_type",
+        'status_code, error_type',
         (
             (HTTPStatus.BAD_REQUEST, ClientError),
             (HTTPStatus.UNAUTHORIZED, ClientAuthError),
@@ -85,8 +85,8 @@ class TestCheckStatus:
     ) -> None:
         client = create_client_for_test_request_status(status_code)
         if error_type == ClientError:  # always raise ClientException with context
-            with pytest.raises(error_type, match="Test response body"):
-                await client.request("GET", "/test_uri")
+            with pytest.raises(error_type, match='Test response body'):
+                await client.request('GET', '/test_uri')
         else:
             with pytest.raises(error_type):
-                await client.request("GET", "/test_uri")
+                await client.request('GET', '/test_uri')

@@ -20,8 +20,8 @@ class ProjectRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/projects/create-project
         """
         raw_response = await self._client.request(
-            method="POST",
-            uri="/projects",
+            method='POST',
+            uri='/projects',
             payload=ProjectCreate(
                 name=name,
                 queues=queues,
@@ -39,8 +39,8 @@ class ProjectRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/projects/get-project
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri=f"/projects/{project_id}",
+            method='GET',
+            uri=f'/projects/{project_id}',
         )
         return self._decode(raw_response, Project)
 
@@ -49,19 +49,19 @@ class ProjectRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/projects/get-projects
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri="/projects",
-            params={"expand": expand}  if expand is not None else None,
+            method='GET',
+            uri='/projects',
+            params={'expand': expand}  if expand is not None else None,
         )
-        return self._decode(raw_response, ProjectWithQueues if expand == "queues" else Project, plural=True)
+        return self._decode(raw_response, ProjectWithQueues if expand == 'queues' else Project, plural=True)
 
     async def get_project_queues(self, project_id: str | int) -> list[Queue]:
         """
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/projects/get-project-queues
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri=f"/projects/{project_id}/queues",
+            method='GET',
+            uri=f'/projects/{project_id}/queues',
         )
         return self._decode(raw_response, Queue, plural=True)
 
@@ -81,13 +81,13 @@ class ProjectRepository(EntityRepository):
         """
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/projects/update-project
         """
-        params = {"version": version}
+        params = {'version': version}
         if expand:
-            params["expand"] = expand
+            params['expand'] = expand
 
         raw_response = await self._client.request(
-            method="PATCH",
-            uri=f"/projects/{project_id}",
+            method='PATCH',
+            uri=f'/projects/{project_id}',
             payload=ProjectEdit(
                 name=name,
                 queues=queues,
@@ -99,13 +99,13 @@ class ProjectRepository(EntityRepository):
             ).model_dump(exclude_none=True, by_alias=True),
             params=params,
         )
-        return self._decode(raw_response, ProjectWithQueues if expand == "queues" else Project)
+        return self._decode(raw_response, ProjectWithQueues if expand == 'queues' else Project)
 
     async def delete_project(self, project_id: str | int) -> None:
         """
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/projects/delete-project
         """
         await self._client.request(
-            method="DELETE",
-            uri=f"/projects/{project_id}",
+            method='DELETE',
+            uri=f'/projects/{project_id}',
         )

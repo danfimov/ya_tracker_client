@@ -23,8 +23,8 @@ class QueueRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/create-queue
         """
         raw_response = await self._client.request(
-            method="POST",
-            uri="/queues/",
+            method='POST',
+            uri='/queues/',
             payload=QueueCreate(
                 key=key,
                 name=name,
@@ -41,8 +41,8 @@ class QueueRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/get-queue
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri=f"/queues/{queue_id}",
+            method='GET',
+            uri=f'/queues/{queue_id}',
         )
         return self._decode(raw_response, Queue)
 
@@ -51,8 +51,8 @@ class QueueRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/get-queues
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri="/queues/",
+            method='GET',
+            uri='/queues/',
         )
         return self._decode(raw_response, Queue, plural=True)
 
@@ -61,8 +61,8 @@ class QueueRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/get-versions
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri=f"/queues/{queue_id}/versions",
+            method='GET',
+            uri=f'/queues/{queue_id}/versions',
         )
         return self._decode(raw_response, QueueVersion, plural=True)
 
@@ -71,8 +71,8 @@ class QueueRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/get-fields
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri=f"/queues/{queue_id}/fields",
+            method='GET',
+            uri=f'/queues/{queue_id}/fields',
         )
         return self._decode(raw_response, QueueField, plural=True)
 
@@ -81,8 +81,8 @@ class QueueRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/delete-queue
         """
         await self._client.request(
-            method="DELETE",
-            uri=f"/queues/{queue_id}",
+            method='DELETE',
+            uri=f'/queues/{queue_id}',
         )
 
     async def restore_queue(self, queue_id: str | int) -> Queue:
@@ -90,8 +90,8 @@ class QueueRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/restore-queue
         """
         raw_response = await self._client.request(
-            method="POST",
-            uri=f"/queues/{queue_id}/_restore",
+            method='POST',
+            uri=f'/queues/{queue_id}/_restore',
         )
         return self._decode(raw_response, Queue)
 
@@ -100,9 +100,9 @@ class QueueRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/delete-tag
         """
         await self._client.request(
-            method="DELETE",
-            uri=f"/queues/{queue_id}/tags/_remove",
-            payload={"tag": tag_name},
+            method='DELETE',
+            uri=f'/queues/{queue_id}/tags/_remove',
+            payload={'tag': tag_name},
         )
 
     async def create_autoaction(
@@ -121,8 +121,8 @@ class QueueRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/create-autoaction
         """
         raw_response = await self._client.request(
-            method="POST",
-            uri=f"/queues/{queue_id}/autoactions",
+            method='POST',
+            uri=f'/queues/{queue_id}/autoactions',
             payload=AutoactionCreate(
                 name=name,
                 actions=actions,
@@ -145,8 +145,8 @@ class QueueRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/get-autoaction
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri=f"/queues/{queue_id}/autoactions/{autoaction_id}",
+            method='GET',
+            uri=f'/queues/{queue_id}/autoactions/{autoaction_id}',
         )
         return self._decode(raw_response, Autoaction)
 
@@ -156,8 +156,8 @@ class QueueRepository(EntityRepository):
     ) -> list[Autoaction]:
         # TODO: add info about this handler to YC docs
         raw_response = await self._client.request(
-            method="GET",
-            uri=f"/queues/{queue_id}/autoactions/",
+            method='GET',
+            uri=f'/queues/{queue_id}/autoactions/',
         )
         return self._decode(raw_response, Autoaction, plural=True)
 
@@ -168,8 +168,8 @@ class QueueRepository(EntityRepository):
     ) -> None:
         # TODO: add info about this handler to YC docs
         await self._client.request(
-            method="DELETE",
-            uri=f"/queues/{queue_id}/autoactions/{autoaction_id}",
+            method='DELETE',
+            uri=f'/queues/{queue_id}/autoactions/{autoaction_id}',
         )
 
     async def create_trigger(
@@ -181,8 +181,8 @@ class QueueRepository(EntityRepository):
         active: bool | None = None,
     ) -> Trigger:
         raw_response = await self._client.request(
-            method="POST",
-            uri=f"/queues/{queue_id}/triggers",
+            method='POST',
+            uri=f'/queues/{queue_id}/triggers',
             payload=TriggerCreate(
                 name=name,
                 actions=actions,
@@ -197,22 +197,22 @@ class QueueRepository(EntityRepository):
         YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/queues/get-trigger
         """
         raw_response = await self._client.request(
-            method="GET",
-            uri=f"/queues/{queue_id}/triggers/{trigger_id}",
+            method='GET',
+            uri=f'/queues/{queue_id}/triggers/{trigger_id}',
         )
         return self._decode(raw_response, Trigger)
 
     async def get_triggers(self, queue_id: str | int) -> list[Trigger]:
         # TODO: add info about this handler to YC docs
         raw_response = await self._client.request(
-            method="GET",
-            uri=f"/queues/{queue_id}/triggers/",
+            method='GET',
+            uri=f'/queues/{queue_id}/triggers/',
         )
         return self._decode(raw_response, Trigger, plural=True)
 
     async def delete_trigger(self, queue_id: str | int, trigger_id: str | int) -> None:
         # TODO: add info about this handler to YC docs
         await self._client.request(
-            method="DELETE",
-            uri=f"/queues/{queue_id}/triggers/{trigger_id}",
+            method='DELETE',
+            uri=f'/queues/{queue_id}/triggers/{trigger_id}',
         )

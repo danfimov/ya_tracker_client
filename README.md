@@ -8,18 +8,23 @@ Async Yandex Tracker Client based on aiohttp and pydantic
 
 ---
 
-API docs: https://cloud.yandex.com/en/docs/tracker/about-api
+You can read [API documentation](https://cloud.yandex.com/en/docs/tracker/about-api) for more information or [API specification](assets/api_specification.yaml) in OpenAPI format.
 
 ## Installation
 
+With pip:
 ```shell
 pip install ya_tracker_client
 ```
 
-or 
-
+With poetry:
 ```shell
 poetry add ya_tracker_client
+```
+
+With uv:
+```shell
+uv add ya_tracker_client
 ```
 
 
