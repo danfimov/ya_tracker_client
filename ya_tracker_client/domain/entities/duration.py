@@ -7,13 +7,12 @@ from ya_tracker_client.domain.entities.base import AbstractEntity
 
 
 PATTERN = compile(
-    r"^P(?=\d+[YMWD])"
+    r"^P(?=[\dT])"
     r"((?P<years>\d+)Y)?"
     r"((?P<months>\d+)M)?"
     r"((?P<weeks>\d+)W)?"
     r"((?P<days>\d+)D)?"
-    r"(?P<time>T(?=\d+[HMS])"
-    r"((?P<hours>\d+)H)?"
+    r"(T((?P<hours>\d+)H)?"
     r"((?P<minutes>\d+)M)?"
     r"((?P<seconds>\d+)S)?)?$",
 )
