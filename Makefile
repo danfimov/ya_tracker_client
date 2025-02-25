@@ -32,10 +32,10 @@ test-cov:  ##@Testing Test application with pytest and create coverage report
 	$(TEST) --cov=$(APPLICATION_NAME) --cov-report html --cov-fail-under=85 --cov-config pyproject.toml
 
 lint:  ##@Code Check code with ruff
-	uv run python3 -m ruff $(CODE) examples tests
+	uv run python3 -m ruff check $(CODE) examples tests
 
 format:  ##@Code Reformat code with ruff
-	uv run python3 -m ruff $(CODE) tests --fix
+	uv run python3 -m ruff check  $(CODE) examples tests --fix
 
 precommit:  # Code Check code with pre-commit hooks
 	pre-commit run --all-files
