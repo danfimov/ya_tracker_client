@@ -117,3 +117,39 @@ class IssueFindParameters(AbstractEntity):
     query: str | None = None
     keys: str | None = None
     queue: str | None = None
+
+
+class ImportIssue(AbstractEntity):
+    summary: str
+    queue: QueueIdentifier | str | int
+    created_at: datetime | str
+    created_by: str | int
+    key: str | None = None
+    updated_at: datetime | str | None = None
+    updated_by: str | int | None = None
+    resolved_at: datetime | str | None = None
+    resolved_by: str | int | None = None
+    status: int | None = None
+    deadline: datetime | str | None = None
+    resolution: int | None = None
+    type: int | None = None
+    description: str | None = None
+    start: datetime | str | None = None
+    end: datetime | str | None = None
+    assignee: str | int | None = None
+    priority: int | None = None
+    affected_versions: list[int] | None = None
+    fix_versions: list[int] | None = None
+    components: list[int] | None = None
+    tags: list[str] | None = None
+    sprint: list[int] | None = None
+    followers: list[int | str] | None = None
+    access: list[int | str] | None = None
+    unique: str | None = None
+    following_maillists: list[str] | None = None
+    original_estimation: int | None = None
+    estimation: int | None = None
+    spent: int | None = None
+    story_points: float | None = None
+    voted_by: list[int | str] | None = None
+    favorite_by: list[int | str] | None = None
