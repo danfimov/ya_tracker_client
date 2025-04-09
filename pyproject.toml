@@ -1,6 +1,6 @@
 [project]
 name = "ya_tracker_client"
-version = "0.0.4"
+version = "0.1.0"
 description = "Async Yandex Tracker Client"
 authors = [
     { name = "Дмитрий Анфимов", email = "work@danfimov.ru" },
