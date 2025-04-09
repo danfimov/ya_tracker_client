@@ -20,9 +20,7 @@ logger = getLogger(__name__)
 
 
 class BaseClient(ABC):
-    """
-    Represents abstract base class for tracker client.
-    """
+    """Represents abstract base class for tracker client."""
 
     def __init__(
         self,
@@ -33,6 +31,8 @@ class BaseClient(ABC):
         api_version: str = 'v2',
     ) -> None:
         """
+        Initialize Tracker client with authentication and configuration parameters.
+
         :param organisation_id: ID from admin panel at Yandex Tracker. No needed for Yandex developers.
         :param oauth_token: OAuth token from registered application at Yandex OAuth - https://oauth.yandex.ru/
         :param iam_token: IAM token from registered application at Yandex OAuth - https://oauth.yandex.ru/
@@ -119,6 +119,4 @@ class BaseClient(ABC):
 
     @abstractmethod
     async def stop(self) -> None:
-        """
-        Stop client gracefully - close all sessions.
-        """
+        """Stop client gracefully - close all sessions."""

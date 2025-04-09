@@ -1,5 +1,5 @@
 from json import loads
-from typing import Any, Type
+from typing import Any
 
 from pydantic import BaseModel
 
@@ -10,7 +10,7 @@ class DeserializationMixin:
     @staticmethod
     def _decode(
         value: bytes,
-        return_type: Type[BaseModel] | None = None,
+        return_type: type[BaseModel] | None = None,
         plural: bool = False,
     ) -> Any:
         if plural:

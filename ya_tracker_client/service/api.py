@@ -42,7 +42,7 @@ class YaTrackerClient(
         iam_token: str | None = None,
         api_host: str = 'https://api.tracker.yandex.net',
         api_version: str = 'v2',
-        timeout: float = 0.,
+        timeout: float = 0.0,
     ) -> None:
         super().__init__(
             client=AiohttpClient(

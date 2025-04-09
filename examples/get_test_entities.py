@@ -1,9 +1,13 @@
+import logging
 import os
 from asyncio import run
 
 from dotenv import load_dotenv
 
 from ya_tracker_client import YaTrackerClient
+
+
+logger = logging.getLogger(__name__)
 
 
 load_dotenv()
@@ -15,13 +19,13 @@ API_ORGANISATION_ID = os.getenv('API_ORGANISATION_ID')
 
 async def main() -> None:
     if not API_ORGANISATION_ID:
-        raise RuntimeError('API_ORGANISATION_ID must be set')
+        msg = 'API_ORGANISATION_ID must be set'
+        raise RuntimeError(msg)
 
     client = YaTrackerClient(
         organisation_id=API_ORGANISATION_ID,
         oauth_token=API_TOKEN,
     )
-
 
     try:
         # requests for tests
@@ -51,11 +55,8 @@ async def main() -> None:
         await client.find_issues()
         await client.get_autoactions('TEST')
         await client.get_triggers('TEST')
-    except Exception as e:
-        print('Test failed')
-        print(e)
-    else:
-        print('Test passed')
+    except Exception:
+        logger.exception('Error occurred')
 
     await client.stop()
 

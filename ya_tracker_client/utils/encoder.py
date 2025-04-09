@@ -14,7 +14,7 @@ class UpgradedJSONEncoder(JSONEncoder):
                 entity = entity.replace(tzinfo=ZoneInfo('UTC'))
             return entity.isoformat()
 
-        if isinstance(entity, Decimal) or isinstance(entity, UUID):
+        if isinstance(entity, Decimal | UUID):
             return str(entity)
 
         if isinstance(entity, URL):

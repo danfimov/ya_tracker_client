@@ -5,9 +5,7 @@ from ya_tracker_client.domain.repositories.base import EntityRepository
 
 class ExternalLinkRepository(EntityRepository):
     async def get_external_applications(self) -> list[ExternalApplication]:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-applications
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-applications."""
         raw_response = await self._client.request(
             method='GET',
             uri='/applications',
@@ -15,9 +13,7 @@ class ExternalLinkRepository(EntityRepository):
         return self._decode(raw_response, ExternalApplication, plural=True)
 
     async def get_external_links(self, issue_id: str) -> list[ExternalLink]:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-external-links
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-external-links."""
         raw_response = await self._client.request(
             method='GET',
             uri=f'/issues/{issue_id}/remotelinks',
@@ -32,9 +28,7 @@ class ExternalLinkRepository(EntityRepository):
         relationship: str = 'RELATES',
         backlink: bool = False,
     ) -> ExternalLink:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/add-external-link
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/add-external-link."""
         raw_response = await self._client.request(
             method='POST',
             uri=f'/issues/{issue_id}/remotelinks',
@@ -48,9 +42,7 @@ class ExternalLinkRepository(EntityRepository):
         return self._decode(raw_response, ExternalLink)
 
     async def delete_external_link(self, issue_id: str, external_link_id: str | int) -> None:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/delete-external-link
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/delete-external-link."""
         await self._client.request(
             method='DELETE',
             uri=f'/issues/{issue_id}/remotelinks/{external_link_id}',

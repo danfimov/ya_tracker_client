@@ -49,12 +49,12 @@ def get_client_for_test_initialization(
 
 
 @pytest.mark.parametrize(
-    'organisation_id, header_name',
-    (
+    ('organisation_id', 'header_name'),
+    [
         (randint(1, 1000), 'X-Org-Id'),
         (str(randint(1, 1000)), 'X-Org-Id'),
         ('test_organisation_id', 'X-Cloud-Org-Id'),
-    ),
+    ],
 )
 def test_init__when_organisation_id_passed__then_use_specific_header_name(organisation_id, header_name) -> None:
     client = get_client_for_test_initialization(

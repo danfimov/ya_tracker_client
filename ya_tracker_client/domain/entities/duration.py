@@ -1,4 +1,4 @@
-from re import compile
+import re
 from typing import Any
 
 from pydantic import model_validator
@@ -6,7 +6,7 @@ from pydantic import model_validator
 from ya_tracker_client.domain.entities.base import AbstractEntity
 
 
-PATTERN = compile(
+PATTERN = re.compile(
     r'^P(?=[\dT])'
     r'((?P<years>\d+)Y)?'
     r'((?P<months>\d+)M)?'
@@ -30,7 +30,7 @@ class Duration(AbstractEntity):
     @classmethod
     def validate(cls, model_value: Any) -> dict | None:
         if not isinstance(model_value, str):
-            return
+            return None
 
         result = PATTERN.match(model_value)
         if result is None:
@@ -63,4 +63,3 @@ class Duration(AbstractEntity):
             duration = f'{duration}T{time}'
 
         return duration
-

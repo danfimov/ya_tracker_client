@@ -4,11 +4,10 @@ import pydantic
 from pydantic import BaseModel, ConfigDict
 
 
-if int(pydantic.VERSION[0]) == 2:
+if int(pydantic.VERSION[0]) == 2:  # noqa: PLR2004
     from pydantic.alias_generators import to_camel
 else:
     from re import sub
-
 
     def to_camel(snake: str) -> str:
         """
@@ -23,7 +22,7 @@ else:
 
 
 def tracker_alias_generator(s: str) -> str:
-    """Convert a string from snake case to camel case and rename url to self"""
+    """Convert a string from snake case to camel case and rename url to self."""
     if s == 'url':
         return 'self'
     return to_camel(s)

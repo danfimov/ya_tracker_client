@@ -51,9 +51,7 @@ class ChecklistRepository(EntityRepository):
         assignee: str | None = None,
         deadline: Deadline | None = None,
     ) -> IssueWithChecklist:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/edit-checklist
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/edit-checklist."""
         raw_response = await self._client.request(
             method='PATCH',
             uri=f'/issues/{issue_id}/checklistItems/{checklist_item_id}',
@@ -67,9 +65,7 @@ class ChecklistRepository(EntityRepository):
         return self._decode(raw_response, IssueWithChecklist)
 
     async def delete_checklist(self, issue_id: str) -> IssueWithChecklist:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/delete-checklist
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/delete-checklist."""
         raw_response = await self._client.request(
             method='DELETE',
             uri=f'/issues/{issue_id}/checklistItems',
@@ -77,9 +73,7 @@ class ChecklistRepository(EntityRepository):
         return self._decode(raw_response, IssueWithChecklist)
 
     async def delete_checklist_item(self, issue_id: str, checklist_item_id: str):
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/delete-checklist-item
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/delete-checklist-item."""
         raw_response = await self._client.request(
             method='DELETE',
             uri=f'/issues/{issue_id}/checklistItems/{checklist_item_id}',

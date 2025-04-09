@@ -1,6 +1,5 @@
 import os
 from asyncio import run
-from pprint import pprint
 
 from dotenv import load_dotenv
 
@@ -23,8 +22,7 @@ async def main() -> None:
         api_host=API_HOST,
     )
 
-    issue = await client.get_issue('XYZ-76')
-    pprint(issue.dict())
+    await client.get_issue('XYZ-76')
 
     await client.stop()
 
