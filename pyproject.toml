@@ -21,12 +21,14 @@ classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: Implementation :: CPython",
     "Topic :: Software Development :: Libraries :: Application Frameworks",
     "Typing :: Typed",
 ]
 readme = "README.md"
-requires-python=">=3.10,<=3.13"
+requires-python=">=3.10,<=3.14"
 dependencies = [
     "aiohttp>=3.8.5",
     "pydantic>=1.10.21",
