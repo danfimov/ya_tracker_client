@@ -12,9 +12,7 @@ class BulkOperationRepository(EntityRepository):
         initial_status: bool | None = None,
         notify: bool = False,
     ) -> BulkOperation:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/bulkchange/bulk-move-issues
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/bulkchange/bulk-move-issues."""
         raw_response = await self._client.request(
             method='POST',
             uri='/bulkchange/_move',
@@ -35,9 +33,7 @@ class BulkOperationRepository(EntityRepository):
         values: dict,
         notify: bool = False,
     ) -> BulkOperation:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/bulkchange/bulk-update-issues
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/bulkchange/bulk-update-issues."""
         raw_response = await self._client.request(
             method='POST',
             uri='/bulkchange/_update',
@@ -56,9 +52,7 @@ class BulkOperationRepository(EntityRepository):
         values: dict | None = None,
         notify: bool = False,
     ) -> BulkOperation:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/bulkchange/bulk-transition
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/bulkchange/bulk-transition."""
         raw_response = await self._client.request(
             method='POST',
             uri='/bulkchange/_transition',

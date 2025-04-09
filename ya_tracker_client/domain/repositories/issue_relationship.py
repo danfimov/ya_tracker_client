@@ -13,9 +13,7 @@ class IssueRelationshipRepository(EntityRepository):
         issue_to: str,
         relationship: IssueRelationshipTypeEnum,
     ) -> IssueRelationship:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/link-issue
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/link-issue."""
         raw_response = await self._client.request(
             method='POST',
             uri=f'/issues/{issue_from}/links',
@@ -30,9 +28,7 @@ class IssueRelationshipRepository(EntityRepository):
         self,
         issue_id: str,
     ) -> list[IssueRelationship]:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-links
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-links."""
         raw_response = await self._client.request(
             method='GET',
             uri=f'/issues/{issue_id}/links',
@@ -44,9 +40,7 @@ class IssueRelationshipRepository(EntityRepository):
         issue_id: str,
         link_id: int,
     ) -> None:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/delete-link-issue
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/delete-link-issue."""
         await self._client.request(
             method='DELETE',
             uri=f'/issues/{issue_id}/links/{link_id}',

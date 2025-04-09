@@ -13,9 +13,7 @@ class WorklogRepository(EntityRepository):
         duration: str,
         comment: str | None = None,
     ) -> Worklog:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/new-worklog
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/new-worklog."""
         raw_response = await self._client.request(
             method='POST',
             uri=f'/issues/{issue_id}/worklog',
@@ -34,9 +32,7 @@ class WorklogRepository(EntityRepository):
         duration: str | Duration,
         comment: str | None = None,
     ) -> Worklog:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/patch-worklog
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/patch-worklog."""
         raw_response = await self._client.request(
             method='PATCH',
             uri=f'/issues/{issue_id}/worklog/{worklog_id}',
@@ -52,18 +48,14 @@ class WorklogRepository(EntityRepository):
         issue_id: str,
         worklog_id: int | str,
     ) -> None:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/delete-worklog
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/delete-worklog."""
         await self._client.request(
             method='DELETE',
             uri=f'/issues/{issue_id}/worklog/{worklog_id}',
         )
 
     async def get_worklog(self, issue_id: str) -> list[Worklog]:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/issue-worklog
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/issue-worklog."""
         raw_response = await self._client.request(
             method='GET',
             uri=f'/issues/{issue_id}/worklog',
@@ -76,9 +68,7 @@ class WorklogRepository(EntityRepository):
         created_at_from: datetime | None = None,
         created_at_to: datetime | None = None,
     ) -> list[Worklog]:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-worklog
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-worklog."""
         payload = {}
         if created_by is not None:
             payload['createdBy'] = created_by

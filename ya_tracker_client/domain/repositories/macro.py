@@ -5,9 +5,7 @@ from ya_tracker_client.domain.repositories.base import EntityRepository
 
 class MacroRepository(EntityRepository):
     async def get_macros(self, queue_id: str) -> list[Macro]:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/get-macroses
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/get-macroses."""
         raw_response = await self._client.request(
             method='GET',
             uri=f'/queues/{queue_id}/macros',
@@ -15,9 +13,7 @@ class MacroRepository(EntityRepository):
         return self._decode(raw_response, Macro, plural=True)
 
     async def get_macro(self, queue_id: str, macro_id: str) -> Macro:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/get-macros
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/get-macros."""
         raw_response = await self._client.request(
             method='GET',
             uri=f'/queues/{queue_id}/macros/{macro_id}',
@@ -31,9 +27,7 @@ class MacroRepository(EntityRepository):
         body: str | None = None,
         field_changes: list[IssueFieldChange] | None = None,
     ) -> Macro:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/post-macros
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/post-macros."""
         raw_response = await self._client.request(
             method='POST',
             uri=f'/queues/{queue_id}/macros',
@@ -53,9 +47,7 @@ class MacroRepository(EntityRepository):
         body: str | None = None,
         field_changes: list[IssueFieldChange] | None = None,
     ) -> Macro:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/patch-macros
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/patch-macros."""
         raw_response = await self._client.request(
             method='PATCH',
             uri=f'/queues/{queue_id}/macros/{macro_id}',
@@ -68,9 +60,7 @@ class MacroRepository(EntityRepository):
         return self._decode(raw_response, Macro)
 
     async def delete_macro(self, queue_id: str, macro_id: str) -> None:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/delete-macros
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/delete-macros."""
         await self._client.request(
             method='DELETE',
             uri=f'/queues/{queue_id}/macros/{macro_id}',

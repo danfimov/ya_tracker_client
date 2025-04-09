@@ -16,9 +16,7 @@ class ProjectRepository(EntityRepository):
         start_date: date | None = None,
         end_date: date | None = None,
     ) -> Project:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/projects/create-project
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/projects/create-project."""
         raw_response = await self._client.request(
             method='POST',
             uri='/projects',
@@ -35,9 +33,7 @@ class ProjectRepository(EntityRepository):
         return self._decode(raw_response, Project)
 
     async def get_project(self, project_id: str | int) -> Project:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/projects/get-project
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/projects/get-project."""
         raw_response = await self._client.request(
             method='GET',
             uri=f'/projects/{project_id}',
@@ -45,9 +41,7 @@ class ProjectRepository(EntityRepository):
         return self._decode(raw_response, Project)
 
     async def get_projects_list(self, expand: str | None = None) -> list[Project | ProjectWithQueues]:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/projects/get-projects
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/projects/get-projects."""
         raw_response = await self._client.request(
             method='GET',
             uri='/projects',
@@ -56,9 +50,7 @@ class ProjectRepository(EntityRepository):
         return self._decode(raw_response, ProjectWithQueues if expand == 'queues' else Project, plural=True)
 
     async def get_project_queues(self, project_id: str | int) -> list[Queue]:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/projects/get-project-queues
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/projects/get-project-queues."""
         raw_response = await self._client.request(
             method='GET',
             uri=f'/projects/{project_id}/queues',
@@ -78,9 +70,7 @@ class ProjectRepository(EntityRepository):
         end_date: date | None = None,
         expand: str | None = None,
     ) -> Project | ProjectWithQueues:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/projects/update-project
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/projects/update-project."""
         params = {'version': version}
         if expand:
             params['expand'] = expand
@@ -102,9 +92,7 @@ class ProjectRepository(EntityRepository):
         return self._decode(raw_response, ProjectWithQueues if expand == 'queues' else Project)
 
     async def delete_project(self, project_id: str | int) -> None:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/projects/delete-project
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/projects/delete-project."""
         await self._client.request(
             method='DELETE',
             uri=f'/projects/{project_id}',

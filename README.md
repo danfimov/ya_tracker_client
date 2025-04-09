@@ -2,7 +2,7 @@
 
 Async Yandex Tracker Client based on aiohttp and pydantic
 
-[![Python](https://img.shields.io/badge/python-^3.10-blue)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/python-3.10_|_3.11_|_3.12_|_3.13-blue)](https://www.python.org/)
 [![Code linter: ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v1.json)](https://github.com/charliermarsh/ruff)
 [![Linters](https://github.com/danfimov/ya_tracker_client/actions/workflows/code-check.yml/badge.svg)](https://github.com/danfimov/ya_tracker_client/actions/workflows/code-check.yml)
 
@@ -52,16 +52,16 @@ async def main() -> None:
         organisation_id=API_ORGANISATION_ID,
         oauth_token=API_TOKEN,
     )
-    
+
     # create issue
     new_issue = await client.create_issue('New issue', 'TRACKER-QUEUE')
-    
+
      # get issue
     issue = await client.get_issue('KEY-1')
-    
+
     # update issue (just pass kwargs)
     issue = await client.edit_issue('KEY-1', description='Hello World')
-    
+
     # don't forget to close tracker on app shutdown
     await client.stop()
 

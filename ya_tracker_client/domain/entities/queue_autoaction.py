@@ -39,5 +39,6 @@ class AutoactionCreate(AbstractEntity):
     @model_validator(mode='after')
     def filter_or_query_is_exists(self) -> 'AutoactionCreate':
         if self.filter is None and self.query is None:
-            raise ValueError('Filter or query must be not None')
+            msg = 'Filter or query must be not None'
+            raise ValueError(msg)
         return self

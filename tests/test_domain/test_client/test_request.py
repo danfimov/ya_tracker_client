@@ -1,7 +1,7 @@
 from http import HTTPStatus
 from logging import getLogger
 from random import randint
-from typing import TYPE_CHECKING, Any, Type
+from typing import Any
 
 import pytest
 
@@ -13,10 +13,6 @@ from ya_tracker_client.domain.client.errors import (
     ClientObjectNotFoundError,
     ClientSufficientRightsError,
 )
-
-
-if TYPE_CHECKING:
-    pass
 
 
 logger = getLogger(__name__)
@@ -48,17 +44,15 @@ def create_client_for_test_request_status(status_code: int) -> ClientForTestRequ
 
 
 class TestCheckStatus:
-    """
-    Test with all statuses from documentation: https://cloud.yandex.com/en/docs/tracker/error-codes
-    """
+    """Test with all statuses from documentation: https://cloud.yandex.com/en/docs/tracker/error-codes."""
 
     @pytest.mark.parametrize(
         'status_code',
-        (
+        [
             HTTPStatus.OK,
             HTTPStatus.CREATED,
             HTTPStatus.NO_CONTENT,
-        ),
+        ],
     )
     async def test_request__when_status_ok__then_not_raise_error(self, status_code: int) -> None:
         client = create_client_for_test_request_status(status_code)
@@ -66,8 +60,8 @@ class TestCheckStatus:
         assert response_body == b'Test response body'
 
     @pytest.mark.parametrize(
-        'status_code, error_type',
-        (
+        ('status_code', 'error_type'),
+        [
             (HTTPStatus.BAD_REQUEST, ClientError),
             (HTTPStatus.UNAUTHORIZED, ClientAuthError),
             (HTTPStatus.FORBIDDEN, ClientSufficientRightsError),
@@ -76,12 +70,12 @@ class TestCheckStatus:
             (HTTPStatus.PRECONDITION_FAILED, ClientObjectConflictError),
             (HTTPStatus.UNPROCESSABLE_ENTITY, ClientError),
             (HTTPStatus.PRECONDITION_REQUIRED, ClientError),
-        ),
+        ],
     )
     async def test_request__when_status_not_ok__then_raise_specific_error(
         self,
         status_code: int,
-        error_type: Type[ClientError],
+        error_type: type[ClientError],
     ) -> None:
         client = create_client_for_test_request_status(status_code)
         if error_type == ClientError:  # always raise ClientException with context

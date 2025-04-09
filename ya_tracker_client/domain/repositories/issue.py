@@ -13,9 +13,7 @@ from ya_tracker_client.domain.repositories.base import EntityRepository
 
 class IssueRepository(EntityRepository):
     async def get_issue(self, issue_id: str, expand: str = '') -> Issue:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-issue
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-issue."""
         raw_response = await self._client.request(
             method='GET',
             uri=f'/issues/{issue_id}',
@@ -37,9 +35,7 @@ class IssueRepository(EntityRepository):
         unique: str | None = None,
         attachment_ids: list[str] | None = None,
     ) -> Issue:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/create-issue#queue
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/create-issue#queue."""
         raw_response = await self._client.request(
             method='POST',
             uri='/issues/',
@@ -65,9 +61,7 @@ class IssueRepository(EntityRepository):
         version: int | None = None,
         **kwargs,
     ) -> Issue:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/patch-issue
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/patch-issue."""
         raw_response = await self._client.request(
             method='PATCH',
             uri=f'/issues/{issue_id}',
@@ -80,9 +74,7 @@ class IssueRepository(EntityRepository):
         self,
         localized: bool = True,
     ) -> list[Priority]:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-priorities
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-priorities."""
         raw_response = await self._client.request(
             method='GET',
             uri='/priorities/',
@@ -94,9 +86,7 @@ class IssueRepository(EntityRepository):
         self,
         issue_id: str,
     ) -> list[Transition]:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-transitions
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-transitions."""
         raw_response = await self._client.request(
             method='GET',
             uri=f'/issues/{issue_id}/transitions/',
@@ -175,7 +165,7 @@ class IssueRepository(EntityRepository):
 
     async def release_scroll_view_resources(self, scroll_id: str, scroll_token: str) -> None:
         """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/search-release
+        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/search-release.
 
         :param scroll_id: ID of the page with scroll results. The ID value is taken from the `X-Scroll-Id` header of the response to the search for issues request.
         :param scroll_token: token that certifies that the request belongs to the current user. The ID value is taken from the `X-Scroll-Token` header of the response to the search for issues request.
@@ -194,9 +184,7 @@ class IssueRepository(EntityRepository):
         comment: str,
         **kwargs,
     ) -> list[Transition]:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/new-transition
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/new-transition."""
         payload = {'comment': comment}
         payload.update(kwargs)
         raw_response = await self._client.request(
@@ -214,9 +202,7 @@ class IssueRepository(EntityRepository):
         field: str | None = None,
         change_type: str | None = None,
     ) -> list[IssueChangeHistory]:
-        """
-        YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-changelog
-        """
+        """YC docs: https://cloud.yandex.com/en/docs/tracker/concepts/issues/get-changelog."""
         raw_response = await self._client.request(
             method='GET',
             uri=f'/issues/{issue_id}/changelog',
