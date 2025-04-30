@@ -7,21 +7,14 @@ jobs:
     name: Lint code
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-python@v4
+    - id: setup-uv
+      uses: astral-sh/setup-uv@v5
       with:
-        python-version: '3.12'
-    - uses: astral-sh/setup-uv@v5
-      with:
-        version: "0.6.13"
-    - uses: actions/cache@v4
-      id: cache
-      with:
-        path: ${{ env.pythonLocation }}
-        key: ${{ runner.os }}-python-${{ env.pythonLocation }}-${{ hashFiles('pyproject.toml') }}-uv
+        version: "0.7.2"
+        use-cache: true
     - name: Install Dependencies
-      if: steps.cache.outputs.cache-hit != 'true'
-      run: |
-        uv pip install --system .[dev]
+      if: steps.setup-uv.outputs.cache-hit != 'true'
+      run: uv sync --all-extras
     - name: Run linters
       run: make lint
   test:
@@ -34,28 +27,21 @@ jobs:
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - id: setup-uv
+        uses: astral-sh/setup-uv@v5
         with:
-          version: "0.5.31"
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
+          version: "0.7.2"
+          use-cache: true
           python-version: ${{ matrix.python-version }}
-      - uses: actions/cache@v4
-        id: cache
-        with:
-          path: ${{ env.pythonLocation }}
-          key: ${{ runner.os }}-python-${{ env.pythonLocation }}-${{ hashFiles('pyproject.toml') }}-uv
       - name: Install Dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          uv pip install --system .[dev]
+        if: steps.setup-uv.outputs.cache-hit != 'true'
+        run: uv sync --all-extras
       - name: Install Pydantic v1
         if: matrix.pydantic-version == 'pydantic-v1'
-        run: uv pip install --system "pydantic>=1.10.0,<2.0.0"
+        run: uv pip install "pydantic>=1.10.0,<2.0.0"
       - name: Install Pydantic v2
         if: matrix.pydantic-version == 'pydantic-v2'
-        run: uv pip install --system --prerelease=disallow "pydantic>=2.0.0,<3.0.0"
+        run: uv pip install --prerelease=disallow "pydantic>=2.0.0,<3.0.0"
       - run: mkdir coverage
       - name: Test
         run: make test
