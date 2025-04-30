@@ -16,7 +16,7 @@ jobs:
         use-cache: true
     - name: Install Dependencies
       if: steps.setup-uv.outputs.cache-hit != 'true'
-      run: uv pip install --all-extras
+      run: uv sync --all-extras
     - name: Run linters
       run: make lint
   test:
@@ -37,7 +37,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install Dependencies
         if: steps.setup-uv.outputs.cache-hit != 'true'
-        run: uv pip install --all-extras
+        run: uv sync --all-extras
       - name: Install Pydantic v1
         if: matrix.pydantic-version == 'pydantic-v1'
         run: uv pip install "pydantic>=1.10.0,<2.0.0"
