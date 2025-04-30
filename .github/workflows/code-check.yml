@@ -1,7 +1,5 @@
 name: Linters and tests
 on: [pull_request]
-env:
-  UV_SYSTEM_PYTHON: 1
 
 jobs:
   lint:
