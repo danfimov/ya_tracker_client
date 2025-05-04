@@ -1,44 +1,42 @@
 args := $(wordlist 2, 100, $(MAKECMDGOALS))
 
-APPLICATION_NAME = ya_tracker_client
+.DEFAULT:
+	@echo "No such command (or you pass two or many targets to ). List of possible commands: make help"
 
-HELP_FUN = \
-	%help; while(<>){push@{$$help{$$2//'options'}},[$$1,$$3] \
-	if/^([\w-_]+)\s*:.*\#\#(?:@(\w+))?\s(.*)$$/}; \
-    print"$$_:\n", map"  $$_->[0]".(" "x(20-length($$_->[0])))."$$_->[1]\n",\
-    @{$$help{$$_}},"\n" for keys %help; \
+.DEFAULT_GOAL := help
 
-CODE = ya_tracker_client
-TEST = uv run python3 -m pytest --verbosity=2 --showlocals --log-level=DEBUG
+##@ Local development
 
-ifndef args
-MESSAGE = "No such command (or you pass two or many targets to ). List of possible commands: make help"
-else
-MESSAGE = "Done"
-endif
+.PHONY: help
+help: ## Show this help
+	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target> <arg=value>\033[0m\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m  %s\033[0m\n\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 
+.PHONY: install
+install: ## Install project requirements
+	@uv sync --all-extras
 
-help: ##@Help Show this help
-	@echo -e "Usage: make [target] ...\n"
-	@perl -e '$(HELP_FUN)' $(MAKEFILE_LIST)
+##@ Testing and formatting
 
-install:  ##@Setup Install project requirements
-	uv sync --all-extras
+.PHONY: test
+test: ## Test application with pytest
+	@pytest --verbosity=2 --showlocals --log-level=DEBUG
 
-test:  ##@Testing Test application with pytest
-	$(TEST)
+.PHONY: test-cov
+test-cov: ## Test application with pytest and create coverage report
+	@pytest --verbosity=2 --showlocals --log-level=DEBUG --cov=ya_tracker_client --cov-report html --cov-fail-under=85 --cov-config pyproject.toml
 
-test-cov:  ##@Testing Test application with pytest and create coverage report
-	$(TEST) --cov=$(APPLICATION_NAME) --cov-report html --cov-fail-under=85 --cov-config pyproject.toml
+.PHONY: lint
+lint: ## Check code with ruff
+	@ruff check ya_tracker_client examples tests
 
-lint:  ##@Code Check code with ruff
-	uv run python3 -m ruff check $(CODE) examples tests
+.PHONY: format
+format: ## Reformat code with ruff
+	@ruff format ya_tracker_client examples tests
 
-format:  ##@Code Reformat code with ruff
-	uv run python3 -m ruff check  $(CODE) examples tests --fix
+.PHONY: precommit
+precommit: ## Check code with pre-commit hooks
+	@pre-commit run --all-files
 
-precommit:  # Code Check code with pre-commit hooks
-	pre-commit run --all-files
-
-clean:  ##@Code Clean directory from garbage files
-	rm -fr *.egg-info dist
+.PHONY: clean
+clean: ## Clean directory from garbage files
+	@rm -fr *.egg-info dist

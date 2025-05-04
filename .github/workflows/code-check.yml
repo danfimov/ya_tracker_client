@@ -15,7 +15,7 @@ jobs:
       if: steps.setup-uv.outputs.cache-hit != 'true'
       run: uv sync --all-extras
     - name: Run linters
-      run: make lint
+      run: uv run ruff check ya_tracker_client examples tests
   test:
     runs-on: ubuntu-latest
     name: Run tests
@@ -43,4 +43,4 @@ jobs:
         run: uv pip install --prerelease=disallow "pydantic>=2.0.0,<3.0.0"
       - run: mkdir coverage
       - name: Test
-        run: make test
+        run: uv run pytest --verbosity=2 --showlocals --log-level=DEBUG
